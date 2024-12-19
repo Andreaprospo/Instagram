@@ -51,7 +51,7 @@ Questo progetto simula un social network dove gli utenti possono registrarsi, ac
 ---
 
 ### 3. **Classe Profilo/Utente**
-- **Difficoltà**: 1/4
+- **Difficoltà**: 2/4
 - **Ordine di esecuzione**: 1
 
 **Attributi**:
