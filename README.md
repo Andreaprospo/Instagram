@@ -13,7 +13,7 @@ Questo progetto simula un social network dove gli utenti possono registrarsi, ac
 
 ## Struttura e Funzionalità del Progetto
 
-### 1. **Post**
+### 1. **Classe Post**
 - **Difficoltà**: 1/4
 - **Ordine di esecuzione**: 1
 
@@ -32,7 +32,7 @@ Questo progetto simula un social network dove gli utenti possono registrarsi, ac
 
 ---
 
-### 2. **Storia**
+### 2. ** Classe Storia**
 - **Difficoltà**: 2/4
 - **Ordine di esecuzione**: 1
 
@@ -50,7 +50,7 @@ Questo progetto simula un social network dove gli utenti possono registrarsi, ac
 
 ---
 
-### 3. **Profilo**
+### 3. **Classe Profilo/Utente**
 - **Difficoltà**: 1/4
 - **Ordine di esecuzione**: 1
 
