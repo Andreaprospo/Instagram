@@ -162,6 +162,49 @@ Questo progetto simula un social network dove gli utenti possono registrarsi, ac
 
 ---
 
+
+# Struttura dei file
+
+## FILEUTENTI
+- **FILEUTENTE**
+  - **FILEINFO**
+    - `bio`: Biografia dell'utente
+    - `foto`: Foto del profilo
+    - `pathFile`: Percorso del file principale dell'utente
+    - `pathFileSeguiti`: Percorso del file che contiene i seguiti
+    - `pathFilePost`: Percorso del file che contiene i post
+  - **FILESEGUITI**
+    - `nomeUtente`: Nome dell'utente seguito
+  - **FILEPUBBLICAZIONE**
+    - `idPubblicazione`: Identificativo unico della pubblicazione (storia o post)
+    - `tipoPubblicazione`: Tipo di pubblicazione (storia o post)
+    - **FILEPOST**
+      - `id`: Identificativo unico del post
+      - `nomeUtente`: Nome dell'utente che ha creato il post
+      - `descrizione`: Descrizione del post
+      - `pathFoto`: Percorso della foto associata al post
+      - `luogo`: Luogo in cui è stato pubblicato il post
+      - `pathFileCommentiPost`: Percorso del file che contiene i commenti del post
+      - `pathFileLikePost`: Percorso del file che contiene i like del post
+      - `giaVisto`: Flag che indica se il post è già stato visto
+    - **FILELIKEPOST**
+      - `nomeUtente`: Nome dell'utente che ha messo il like al post
+    - **FILECOMMENTI**
+      - `nomeUtente`: Nome dell'utente che ha commentato
+      - `testoCommento`: Testo del commento
+    - **FILESTORIA**
+      - `id`: Identificativo unico della storia
+      - `nomeUtente`: Nome dell'utente che ha creato la storia
+      - `pathFoto`: Percorso della foto associata alla storia
+      - `dataPubblicazione`: Data di pubblicazione della storia
+      - `luogo`: Luogo in cui è stata pubblicata la storia
+      - `giaVisto`: Flag che indica se la storia è stata vista
+      - `pathFileLikeStoria`: Percorso del file che contiene i like della storia
+    - **FILELIKESTORIA**
+      - `nomeUtente`: Nome dell'utente che ha messo il like alla storia
+
+
+
 ## Struttura dei file
 
 - `src/`: Contiene il codice sorgente.
