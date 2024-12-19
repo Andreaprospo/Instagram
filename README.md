@@ -32,7 +32,7 @@ Questo progetto simula un social network dove gli utenti possono registrarsi, ac
 
 ---
 
-### 2. ** Classe Storia**
+### 2. **Classe Storia**
 - **Difficoltà**: 2/4
 - **Ordine di esecuzione**: 1
 
