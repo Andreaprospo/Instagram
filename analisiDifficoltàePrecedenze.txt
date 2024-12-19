@@ -1,0 +1,72 @@
+Difficolta = 1 a 4
+ordine = 1. incremento
+-
+-
+Post 2 - 1.
+	attributi:
+		pathFoto, data, numeroLike, commenti[], di chi è (profilo)
+	metodi:
+		public toCSV (scrivi su file) 1
+		public fromCSV (leggi da file) 1
+		public get e set [controlli] 1
+		private calcolaLike (trova tutti i like e conta) 2
+-
+-
+Storia 2 - 1.
+	attributi:
+		pathFoto, data, di chi è (profilo), numeroVisualizzazione
+	metodi:
+		public toCSV (scrivi su file) 1 
+		public fromCSV (leggi da file) 1 
+		public get e set [controlli] 1
+		( public contaVisualizzazione ) 2?
+-
+-
+Profilo 1 - 1.
+	attributi:
+		nomeUtente, mail, password, descrizione, seguiti[], followers[], post[]
+	metodi: 
+		public toCSV (scrivi su file) 1
+		public fromCSV (leggi da file) 1 
+		public get e set [controlli] 1
+-
+-
+index (registarti o login) - 1 - 2.
+-
+-
+paginaRegistrati (mail, password, salvataggio informazioni file) - 2 - 2.
+gestoreRegistrati (non stesso nome utente e salvataggio dati)  - 2 - 2.
+-
+-
+paginaLogin (mail, password) - 1 - 2.
+gestoreLogin (controllo la correttezza della password e se l'utente esiste di già) - 3 - 2.
+-
+-
+footer (home, aggiungiPost, tuoProfilo) - 1 - 2. 
+gestoreLogout (pulisci tutto e rimanda alla index) - 1 - 2.
+-
+-
+paginaAddStoria (upload foto, creazione file) - 2 - 3.
+gestoreAddStoria (prendi i dati e li setta) - 2 - 3.
+-
+-
+paginaAddPost (upload foto e aggiunta descrizione e set vari parametri) - 2 - 3.
+gestoreAddPost (prendi dati e li salva) - 2 - 3.
+-
+-
+paginaProfilo (visualizzazione dati, post, seguiti e followers) ((Eliminazione profilo con pulsante)) - 4 - 4.
+gestorePaginaProfilo() - 3 - 4.
+-
+-
+paginaHome (post e storie, aggiunta commenti e like) - 4 - 5.
+gestorePaginaHome () - 4 - 5.
+-
+-
+
+
+
+
+
+
+
+		

@@ -6,7 +6,7 @@
 		inserimento mail e password (controllo gia esistenti)
 		-> Home 
 		
-		
+---- PAGINE ----	
 		
 index (registarti o login)
 paginaHome (post e storie, aggiunta commenti e like)
@@ -24,6 +24,8 @@ gestorePaginaProfilo()
 gestorePaginaHome ()
 
 footer (home, aggiungiPost, tuoProfilo)
+
+----
 
 Post 
 	attributi:
