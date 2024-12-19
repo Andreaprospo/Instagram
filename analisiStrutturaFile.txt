@@ -1,0 +1,20 @@
+FILEUTENTI
+    -> FILEUTENTE
+        -> FILEINFO 
+        -> FILESEGUITI
+        -> FILEPUBBLICAZIONE
+            ->FILEPOST
+                ->FILELIKEPOST
+                ->FILECOMMENTI
+            ->FILESTORIA
+                ->FILELIKESTORIA
+
+
+FILEINFO: bio, foto, pathFile, pathFileSeguiti, pathFilePost
+FILESEGUITI: nomeUtente 
+FILEPUBBLICAZIONE: idPubblicazione, tipoPubblicazione (storia/post)
+FILEPOST: id, nomeUtente, descrizione, pathFoto, luogo, pathFileCommentiPost, pathFileLikePost, giaVisto
+FILELIKEPOST: nomeUtente
+FILECOMMENTI: nomeUtente, testoCommento
+FILESTORIA: id, nomeUtente, pathFoto, dataPubblicazione, luogo, giaVisto, pathFileLikeStoria
+FILELIKESTORIA: nomeUtente
