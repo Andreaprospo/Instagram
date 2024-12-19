@@ -162,31 +162,7 @@ Questo progetto simula un social network dove gli utenti possono registrarsi, ac
 
 ---
 
-## Come eseguire il progetto
-
-1. Clona il repository:
-    ```bash
-    git clone https://github.com/tuo-username/progetto-social-media.git
-    ```
-
-2. Naviga nella cartella del progetto:
-    ```bash
-    cd progetto-social-media
-    ```
-
-3. Compila ed esegui il progetto utilizzando il tuo ambiente di sviluppo preferito.
-
-4. Segui le istruzioni per registrarti, fare il login e interagire con i post e le storie.
-
 ## Struttura dei file
 
 - `src/`: Contiene il codice sorgente.
 - `data/`: Contiene i file CSV per salvare i dati di utenti, post e storie.
-
-## Contribuire
-
-Se desideri contribuire a questo progetto, sentiti libero di fare un fork e inviare una pull request. Assicurati di seguire le convenzioni di codifica e di testare le tue modifiche.
-
-## Licenza
-
-Questo progetto è concesso in licenza sotto la [MIT License](LICENSE).
