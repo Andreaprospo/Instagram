@@ -4,7 +4,7 @@ ordine = 1. incremento
 -
 Post 2 - 1. -----Molte
 	attributi:
-		pathFoto, data, numeroLike, commenti[], di chi è (profilo)
+		id, di chi è (profilo), descrizione, pathFoto, luogo, data, pathFileCommentiPost, pathFileLikePost, giaVisto
 	metodi:
 		public toCSV (scrivi su file) 1
 		public fromCSV (leggi da file) 1
@@ -14,7 +14,7 @@ Post 2 - 1. -----Molte
 -
 Storia 2 - 1. -----Prose
 	attributi:
-		pathFoto, data, di chi è (profilo), numeroVisualizzazione
+		id, pathFoto, data, di chi è (profilo), numeroVisualizzazioni, giaVisto, pathFileLikeStoria
 	metodi:
 		public toCSV (scrivi su file) 1 
 		public fromCSV (leggi da file) 1 
@@ -24,7 +24,7 @@ Storia 2 - 1. -----Prose
 -
 Profilo 1 - 1. -----Molte
 	attributi:
-		nomeUtente, mail, password, descrizione, seguiti[], followers[], post[]
+		id, nomeUtente, mail, password, descrizione, pathFoto, seguiti[], followers[], post[]
 	metodi: 
 		public toCSV (scrivi su file) 1
 		public fromCSV (leggi da file) 1 
@@ -62,11 +62,3 @@ paginaHome (post e storie, aggiunta commenti e like) - 4 - 5. -----Prose
 gestorePaginaHome () - 4 - 5. -----Prose
 -
 -
-
-
-
-
-
-
-
-		
