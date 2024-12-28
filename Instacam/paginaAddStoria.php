@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="iconaSito.png" type="image/png">
         <title>Add Storia</title>
     </head>
     <body>
@@ -11,11 +12,10 @@
                 <label for="file">Seleziona una foto:</label>
                 <input type="file" name="file" id="file" >
             </div>
-            <div>
-                <label for="">data</label>
-                <input type="date" name="data">
-            </div>
             <button type="submit">Carica</button>
         </form>
+        <?php
+            require_once "footer.php";
+        ?>
     </body>
 </html>

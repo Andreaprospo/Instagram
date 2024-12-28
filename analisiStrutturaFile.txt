@@ -1,20 +1,26 @@
 FILEUTENTI
     -> FILEUTENTE
-        -> FILEINFO 
-        -> FILESEGUITI
-        -> FILEPUBBLICAZIONE
-            ->FILEPOST
-                ->FILELIKEPOST
-                ->FILECOMMENTI
-            ->FILESTORIA
-                ->FILELIKESTORIA
+        ->FILEINFO 
+        ->FILESEGUITI
+        ->FILEPUBBLICAZIONE
+        ->FILELIKEPOST
+        ->FILECOMMENTI
+        ->FILELIKESTORIA
+	->Foto (Cartella)
+	  -> foto (esempio foto)
+	  -> foto ""
+	  -> foto ""
+
+guardare esempio Marco, inserito nella Creazione pagina gestoreAddStoria (27/12/24)
 
 
 FILEINFO: bio, foto, pathFile, pathFileSeguiti, pathFilePost
 FILESEGUITI: nomeUtente 
-FILEPUBBLICAZIONE: idPubblicazione, tipoPubblicazione (storia/post)
-FILEPOST: id, nomeUtente, descrizione, pathFoto, luogo, pathFileCommentiPost, pathFileLikePost, giaVisto
+FILEPUBBLICAZIONE: idPubblicazione, tipoPubblicazione (storia/post), nomeUtente, dataPubblicazione, descrizione, luogo, giaVisto
+
+Tutti i path relativi alla foto, ai commenti o ai like si prendono grazie all'id perchè il file verrà salvato con il nome dell'id relativa alla storia/post
+es: se il post ha id = 4, la foto relativa avrà il nome 4.png, il file dei commenti sarà 4.csv e il file dei like sarà 4.csv. Ovviamente essendo in diverse cartelle i file possono avere lo stesso nome 
+	
 FILELIKEPOST: nomeUtente
 FILECOMMENTI: nomeUtente, testoCommento
-FILESTORIA: id, nomeUtente, pathFoto, dataPubblicazione, luogo, giaVisto, pathFileLikeStoria
 FILELIKESTORIA: nomeUtente
