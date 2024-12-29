@@ -1,0 +1,30 @@
+FILEUTENTI
+    -> FILEUTENTE
+        ->FILEINFO 
+        ->FILESEGUITI
+        ->FILEPUBBLICAZIONE
+        ->FILELIKEPOST
+        ->CARTELLACOMMENTI (cartella) 
+	  -> id.csv (con all'interno commenti)
+        ->FILELIKESTORIA
+	->FOTOPOST (cartella)
+	  -> foto (esempio foto)
+	  -> foto ""
+	  -> foto ""
+	->FOTOSTORIA (cartella)
+	  -> foto (esempio foto)
+	  -> foto ""
+	  -> foto ""
+
+guardare esempio Marco, inserito nella Creazione pagina gestoreAddStoria (27/12/24)
+
+FILEINFO: bio
+FILESEGUITI: nomeUtente 
+FILEPUBBLICAZIONE: idPubblicazione, tipoPubblicazione (storia/post), nomeUtente, dataPubblicazione, descrizione, luogo, giaVisto
+
+Tutti i path relativi alla foto, ai commenti o ai like si prendono grazie all'id perchè il file verrà salvato con il nome dell'id relativa alla storia/post
+es: se il post ha id = 4, la foto relativa avrà il nome 4.png, il file dei commenti sarà 4.csv e il file dei like sarà 4.csv. Ovviamente essendo in diverse cartelle i file possono avere lo stesso nome 
+	
+FILELIKEPOST: nomeUtente
+FILECOMMENTI: nomeUtente, testoCommento
+FILELIKESTORIA: nomeUtente

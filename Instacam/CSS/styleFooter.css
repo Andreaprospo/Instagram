@@ -1,0 +1,40 @@
+/* Stile per il footer */
+#superDiv {
+    display: flex;
+    justify-content: space-evenly; /* Distribuzione uniforme degli elementi */
+    align-items: center;
+    background-color: #B22222; /* Rosso scuro (tipo "Firebrick") */
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0; /* Assicurarsi che parta dall'inizio */
+    right: 0; /* Assicurarsi che arrivi fino alla fine */
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+    font-family: 'Poppins', sans-serif; /* Font moderno e accattivante */
+    margin: 0;
+}
+
+#superDiv div {
+    text-align: center;
+}
+
+#superDiv a {
+    color: #FFFFFF; /* Testo bianco */
+    text-decoration: none; /* Nessuna sottolineatura */
+    font-size: 18px; /* Dimensione maggiore per miglior leggibilità */
+    font-weight: 700; /* Grassetto per maggiore risalto */
+    letter-spacing: 1.5px; /* Spaziatura più evidente */
+    text-transform: uppercase; /* Testo in maiuscolo */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+#superDiv a:hover {
+    color: #FF6347; /* Rosso aranciato al passaggio del mouse */
+    transform: scale(1.1); /* Leggero ingrandimento */
+}
+
+#superDiv a:active {
+    color: #FFC1C1; /* Rosso chiaro al click */
+    transform: scale(1); /* Reset trasformazione */
+}
