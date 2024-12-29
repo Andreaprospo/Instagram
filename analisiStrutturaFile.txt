@@ -18,8 +18,7 @@ FILEUTENTI
 
 guardare esempio Marco, inserito nella Creazione pagina gestoreAddStoria (27/12/24)
 
-
-FILEINFO: bio, foto, pathFile, pathFileSeguiti, pathFilePost
+FILEINFO: bio
 FILESEGUITI: nomeUtente 
 FILEPUBBLICAZIONE: idPubblicazione, tipoPubblicazione (storia/post), nomeUtente, dataPubblicazione, descrizione, luogo, giaVisto
 
