@@ -4,9 +4,14 @@ FILEUTENTI
         ->FILESEGUITI
         ->FILEPUBBLICAZIONE
         ->FILELIKEPOST
-        ->FILECOMMENTI
+        ->CARTELLACOMMENTI (cartella) 
+	  -> id.csv (con all'interno commenti)
         ->FILELIKESTORIA
-	->Foto (Cartella)
+	->FOTOPOST (cartella)
+	  -> foto (esempio foto)
+	  -> foto ""
+	  -> foto ""
+	->FOTOSTORIA (cartella)
 	  -> foto (esempio foto)
 	  -> foto ""
 	  -> foto ""
