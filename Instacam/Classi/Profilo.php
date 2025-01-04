@@ -88,17 +88,14 @@ class Profilo
         $dati = "$this->id;$this->nomeUtente;$this->mail;$this->password;$this->descrizione;$this->pathFoto";
         file_put_contents($path, $dati);
     }
-    public function fromCSV($path)
+    public static function fromCSV($username)
     {
-        if (file_exists($path)) {
-            $dati = file_get_contents($path);
+        if (file_exists("FileUtenti/$username")) {
+            $dati = file_get_contents("FileUtenti/$username/FileInfo.csv");
             $arrayDati = explode(";", $dati);
-            $this->id = $arrayDati[0];
-            $this->nomeUtente = $arrayDati[1];
-            $this->mail = $arrayDati[2];
-            $this->password = $arrayDati[3];
-            $this->descrizione = $arrayDati[4];
-            $this->pathFoto = $arrayDati[5];
+
+            //creare un costruttore per poter ritornare un oggetto Profilo
+            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4],  $arrayDati[5]);
         }
     }
 }

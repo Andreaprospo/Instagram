@@ -4,7 +4,7 @@ ordine = 1. incremento
 -
 Post 2 - 1. -----Molte
 	attributi:
-		id, di chi è (profilo), descrizione, luogo, data, giaVisto
+		id, estensione, data, username, descrizione, luogo, giaVisto
 	metodi:
 		public toCSV (scrivi su file) 1
 		public fromCSV (leggi da file) 1
@@ -14,7 +14,7 @@ Post 2 - 1. -----Molte
 -
 Storia 2 - 1. -----Prose
 	attributi:
-		id, di chi è (profilo), numeroVisualizzazioni, data, giaVisto
+		id, estensione, data, username, numeroVisualizzazioni, giaVisto;
 	metodi:
 		public toCSV (scrivi su file) 1 
 		public fromCSV (leggi da file) 1 
@@ -24,30 +24,32 @@ Storia 2 - 1. -----Prose
 -
 Profilo 1 - 1. -----Molte
 	attributi:
-		id, nomeUtente, mail, password, descrizione, seguiti[], followers[], post[] //storie[] (tutte le storie dell'utente)
+		id, username, mail, password, descrizione, seguiti[], followers[], post[] //storie[] (tutte le storie dell'utente)
 	metodi: 
 		public toCSV (scrivi su file) 1
 		public fromCSV (leggi da file) 1 
 		public get e set [controlli] 1
 -
 -
-index (registarti o login) - 1 - 2. -----Prose 
+index (registarti o login) - 1 - 2. -----Prose /
 -
 -
 paginaRegistrati (mail, password, salvataggio informazioni file) - 2 - 2. -----Molte
 gestoreRegistrati (non stesso nome utente e salvataggio dati)  - 2 - 2. -----Molte
 -
 -
-paginaLogin (mail, password) - 1 - 2. -----Prose
-gestoreLogin (controllo la correttezza della password e se l'utente esiste di già) - 3 - 2. -----Prose
+paginaLogin (mail, password) - 1 - 2. -----Prose /
+gestoreLogin (controllo la correttezza della password e se l'utente esiste di già) - 3 - 2. -----Prose /
+css (da ultimare)
 -
 -
-footer (home, aggiungiPost, tuoProfilo) - 1 - 2.  -----Prose
-gestoreLogout (pulisci tutto e rimanda alla index) - 1 - 2. -----Prose
+footer (home, aggiungiPost, tuoProfilo) - 1 - 2.  -----Prose / 
+gestoreLogout (pulisci tutto e rimanda alla index) - 1 - 2. -----Prose /
+css(da rivedere)
 -
 -
-paginaAddStoria (upload foto, creazione file) - 2 - 3.  -----Prose
-gestoreAddStoria (prendi i dati e li setta) - 2 - 3.  -----Prose
+paginaAddStoria (upload foto, creazione file) - 2 - 3.  -----Prose /
+gestoreAddStoria (prendi i dati e li setta) - 2 - 3.  -----Prose /
 -
 -
 paginaAddPost (upload foto e aggiunta descrizione e set vari parametri) - 2 - 3. -----Molte

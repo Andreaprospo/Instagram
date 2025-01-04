@@ -2,38 +2,66 @@
 
     class Storia
     {
-        private $id, $pathFoto, $data, $idProfilo, $numeroVisualizzazioni, $giaVisto, $pathFileLikeStoria;
+        private $id, $estensione, $data, $username, $numeroVisualizzazioni, $giaVisto;
 
+        public function __construct($username, $estensione, $data)
+        {
+            $this->id = $this->getLastId($username);
+            $this->estensione = $estensione;
+            $this->data = $data;
+            $this->username = $username;
+            $this->numeroVisualizzazioni = 0;
+        }
         public function toCSV()
         {
-            $path = "../FileUtenti/$this->idProfilo/FileStoria/$this->id$this->idProfilo.csv";
-            $dati = "$this->id;$this->idProfilo,$this->pathFoto,$this->data,$this->giaVisto,$this->pathFileLikeStoria";
+            $path = "FileUtenti/$this->username/FilePubblicazione.csv";
+            $dati = "$this->id;Storia;$this->username;$this->estensione;$this->data;$this->giaVisto\n";
             file_put_contents($path, $dati, FILE_APPEND);
         }
 
-        public function fromCSV()
+        public function fromCSV($id, $username)
         {
-            
+            $pathStoria = "FileUtenti/$username/FilePubblicazioni.csv";
+            if(file_exists($pathStoria))
+            {
+                $contenuto = file_get_contents($pathStoria);
+                $righe = explode("\n", $contenuto);
+                foreach ($righe as $riga) {
+                    $campi = explode(";", $riga);
+                    if($campi[0] == $id)
+                        return new Storia($campi[2], $campi[3], $campi[4]);
+                }
+            }
+            return null;
         }
 
-        public function getPathFoto()
+        //-------GET-------//
+        public function getIdStoria()
         {
-            return $this->pathFoto;
+            return $this->id;
         }
         public function getData()
         {
-            return $this->pathFoto;
+            return $this->data;
         }
 
-        public function getIdProfilo(): mixed
+        public function getUsername(): mixed
         {
-            return $this->pathFoto;
+            return $this->username;
         }
 
         public function getNumeroVisualizzazioni()
         {
-            return $this->pathFoto;
+            return $this->numeroVisualizzazioni;
         }
+        public function getGiaVisto()
+        {
+            return $this->giaVisto;
+        }
+        //-----------------//
+
+
+        //-------SET-------//
         public function setPathFoto()
         {
             //Controllo path
@@ -50,7 +78,26 @@
         {
             
         }
+        //-----------------//
 
+        public static function getLastId($username)
+        {
+            $pathPartenza = "FileUtenti/$username/FotoStoria/";
+            $uploadDir = opendir($pathPartenza);
+            $lastId = -1;
+    
+            while($nomeFileIntero = readdir($uploadDir))
+            {
+                $idFile = explode(".", $nomeFileIntero)[0];
+                if($idFile == "." || $idFile == "..")
+                    continue;
+    
+                if($lastId < $idFile)
+                    $lastId = $idFile;
+                echo $idFile . "\n";
+            }
+            closedir($uploadDir);
+            return $lastId;
+        }
     }
-
 ?>

@@ -1,5 +1,5 @@
 <?php
-    if (!isset($_GET["mail"], $_GET["password"], $_GET["nomeUtente"]) || empty($_GET["mail"]) || empty($_GET["password"]) || empty($_GET["nomeUtente"])) {
+    if (!isset($_GET["mail"], $_GET["password"], $_GET["username"]) || empty($_GET["mail"]) || empty($_GET["password"]) || empty($_GET["username"])) {
         header("location: paginaRegistrati.php?messaggio=Inserisci tutti i dati richiesti");
         exit;
     }

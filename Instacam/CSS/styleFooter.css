@@ -1,17 +1,17 @@
-/* Stile per il footer */
+/* Stile generale per il footer */
 #superDiv {
     display: flex;
-    justify-content: space-evenly; /* Distribuzione uniforme degli elementi */
+    justify-content: space-evenly;
     align-items: center;
-    background-color: #B22222; /* Rosso scuro (tipo "Firebrick") */
+    background-color: #B22222; /* Rosso scuro */
     padding: 15px 0;
     position: fixed;
     bottom: 0;
-    left: 0; /* Assicurarsi che parta dall'inizio */
-    right: 0; /* Assicurarsi che arrivi fino alla fine */
+    left: 0;
+    right: 0;
     width: 100%;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
-    font-family: 'Poppins', sans-serif; /* Font moderno e accattivante */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
 }
 
@@ -37,4 +37,41 @@
 #superDiv a:active {
     color: #FFC1C1; /* Rosso chiaro al click */
     transform: scale(1); /* Reset trasformazione */
+}
+
+/* Media query specifica per schermi piccoli (400px circa) */
+@media screen and (max-width: 480px) {
+    #superDiv {
+        flex-direction: column; /* Disporre gli elementi in colonna */
+        align-items: center; /* Centrare tutti gli elementi */
+        padding: 10px 5px; /* Ridurre il padding per ottimizzare lo spazio */
+    }
+
+    #superDiv div {
+        width: 100%; /* Ogni elemento occupa l'intera larghezza */
+        margin-bottom: 10px; /* Spaziatura tra i blocchi */
+        text-align: center; /* Allineamento centrale */
+    }
+
+    #superDiv a {
+        font-size: 14px; /* Testo più piccolo per schermi stretti */
+        letter-spacing: 0.5px; /* Ridurre la spaziatura tra le lettere */
+        margin: 5px 0; /* Margine uniforme tra i link */
+    }
+}
+
+/* Media query per schermi molto piccoli (max 400px) */
+@media screen and (max-width: 400px) {
+    #superDiv a {
+        font-size: 12px; /* Ridurre ancora la dimensione del testo */
+        line-height: 1.5; /* Aumentare l'altezza della linea per leggibilità */
+    }
+
+    #superDiv {
+        padding: 8px 5px; /* Ulteriore riduzione del padding */
+    }
+
+    #superDiv div {
+        margin-bottom: 8px; /* Spaziatura più contenuta */
+    }
 }

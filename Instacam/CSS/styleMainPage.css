@@ -1,0 +1,105 @@
+/* SI CHIAMA COSI' PERCHE' INDEX O INDICE NON FUNZIONA */
+/* Stile generale per il body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif; /* Font moderno */
+    background: linear-gradient(135deg, #5a0000, #c40000); /* Gradiente rosso scuro intenso */
+    color: #ffffff; /* Colore del testo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altezza che occupa l'intera finestra */
+    overflow: hidden; /* Evita scrolling indesiderato */
+}
+
+/* Contenitore principale */
+.container {
+    display: flex;
+    flex-direction: column; /* Elementi disposti verticalmente */
+    align-items: center; /* Centrati orizzontalmente */
+    justify-content: center; /* Centrati verticalmente */
+    text-align: center; /* Testo centrato */
+    width: 100%;
+    max-width: 400px; /* Larghezza massima del contenitore */
+    background: rgba(255, 255, 255, 0.1); /* Sfondo semi-trasparente */
+    padding: 30px;
+    border-radius: 15px; /* Angoli arrotondati */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* Ombra più scura */
+    backdrop-filter: blur(10px); /* Effetto blur */
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Bordo traslucido */
+}
+
+/* Stile per il logo */
+.logo img {
+    width: 120px; /* Dimensione del logo */
+    height: auto; /* Mantiene le proporzioni */
+    margin-bottom: 20px; /* Spaziatura sotto il logo */
+    animation: fadeIn 1s ease-in-out; /* Animazione per la comparsa del logo */
+}
+
+/* Stile per i pulsanti */
+.buttons a {
+    text-decoration: none; /* Rimuove la sottolineatura */
+    display: block;
+    margin-bottom: 20px; /* Spaziatura tra i pulsanti */
+    width: 100%; /* Larghezza del contenitore */
+    max-width: 200px; /* Larghezza massima del pulsante */
+}
+
+button {
+    width: 100%; /* Occupa tutta la larghezza del contenitore */
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #ff0000, #ff4500); /* Gradiente rosso vivo */
+    color: white; /* Testo bianco */
+    border: none;
+    border-radius: 8px; /* Angoli arrotondati */
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase; /* Testo in maiuscolo */
+    cursor: pointer; /* Mostra la mano al passaggio del mouse */
+    transition: background 0.3s ease, transform 0.2s ease; /* Animazioni */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Ombra più scura */
+}
+
+/* Colore del pulsante al passaggio del mouse */
+button:hover {
+    background: linear-gradient(135deg, #ff6347, #ff0000); /* Gradiente rosso aranciato */
+    transform: translateY(-3px); /* Effetto di spinta verso l'alto */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Ombra più intensa */
+}
+
+/* Colore del pulsante al click */
+button:active {
+    transform: translateY(0); /* Reset della trasformazione */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Ombra originale */
+}
+
+/* Animazione per la comparsa del logo */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Stile responsive per schermi piccoli */
+@media screen and (max-width: 400px) {
+    .logo img {
+        width: 100px; /* Riduci la dimensione del logo */
+    }
+
+    button {
+        font-size: 14px; /* Riduci la dimensione del testo */
+        padding: 10px 12px; /* Riduci il padding */
+    }
+
+    .buttons a {
+        max-width: 180px; /* Riduci la larghezza dei pulsanti */
+    }
+}

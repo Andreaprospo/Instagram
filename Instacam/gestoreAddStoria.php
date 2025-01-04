@@ -1,4 +1,5 @@
 <?php
+    require_once "Classi/Storia.php";
 
     if (isset($_FILES['file'])) 
     {
@@ -14,7 +15,7 @@
         //$username = $_SESSION["utente"];
         $username = "Marco";
         $pathUtente = "FileUtenti/$username";
-        $pathCartellaFoto = "$pathUtente/Foto";
+        $pathCartellaFoto = "$pathUtente/FotoStoria";
         //
 
         //crea la cartella se non esiste
@@ -22,12 +23,9 @@
             mkdir($pathCartellaFoto, 0777, true); 
         }
         //
-
-        //prendo l'ultimo id della storia così da identificarlo univocamente
-        $idStoria = getLastId($username) + 1;
-        //
-
-        //combino il nome utente e metto id 
+        
+        //combino il nome utente e metto id (+ 1 perchè restituisce l'ultimo id inserito)
+        $idStoria = Storia::getLastId($username) + 1;
         $pathFinale = "$pathCartellaFoto/$idStoria.$estensioneFile";
         //
 
@@ -43,31 +41,9 @@
         //
 
         //aggiungo una nuova dupla nel file FilePubblicazioni.csv
-        $infoDaAggiungere = "$idStoria;Storia;$username;$infoDataPubblicazione;null;null;false";
-        file_put_contents("$pathUtente/FilePubblicazione.csv", $infoDaAggiungere+"\n", FILE_APPEND);
+        $storia  = new Storia($estensioneFile, $infoDataPubblicazione, $username);
+        $storia->toCSV();
     } 
     else 
         echo "No file caricati";
-?>
-
-<?php
-    function getLastId($username)
-    {
-        $pathPartenza = "FileUtenti/$username/Foto/";
-        $uploadDir = opendir($pathPartenza);
-        $lastId = 0;
-
-        while($nomeFileIntero = readdir($uploadDir))
-        {
-            $nomeFile = explode(".", $nomeFileIntero)[0];
-            if($nomeFile == "." || $nomeFile == "..")
-                continue;
-
-            if($lastId < $nomeFile)
-                $lastId = $nomeFile;
-            echo $nomeFile . "\n";
-        }
-        closedir($uploadDir);
-        return $lastId;
-    }
 ?>
