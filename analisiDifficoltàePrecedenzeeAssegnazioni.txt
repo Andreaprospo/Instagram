@@ -40,12 +40,12 @@ gestoreRegistrati (non stesso nome utente e salvataggio dati)  - 2 - 2. -----Mol
 -
 paginaLogin (mail, password) - 1 - 2. -----Prose /
 gestoreLogin (controllo la correttezza della password e se l'utente esiste di già) - 3 - 2. -----Prose /
-css (da ultimare)
+css (da ultimare) /
 -
 -
 footer (home, aggiungiPost, tuoProfilo) - 1 - 2.  -----Prose / 
 gestoreLogout (pulisci tutto e rimanda alla index) - 1 - 2. -----Prose /
-css(da rivedere)
+css(da rivedere) / 
 -
 -
 paginaAddStoria (upload foto, creazione file) - 2 - 3.  -----Prose /

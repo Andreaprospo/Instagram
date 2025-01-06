@@ -62,21 +62,18 @@
 
 
         //-------SET-------//
-        public function setPathFoto()
+        public function setData($data)
         {
-            //Controllo path
+            $this->data = $data;
         }
-        public function setData()
+        public function setIdProfilo($id)
         {
-            
+            $this->id = $id;
         }
-        public function setIdProfilo()
+        public function setNumeroVisualizzazioni($numeroVisualizzazioni = 0)
         {
-            
-        }
-        public function setNumeroVisualizzazioni()
-        {
-            
+            //DA CAMBIARE, BISOGNA HOMEPAGE
+            $this->numeroVisualizzazioni = $numeroVisualizzazioni;
         }
         //-----------------//
 
@@ -99,5 +96,5 @@
             closedir($uploadDir);
             return $lastId;
         }
-    }
+   }
 ?>

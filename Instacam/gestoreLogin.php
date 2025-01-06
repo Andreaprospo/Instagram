@@ -3,7 +3,7 @@
 
     if(!isset($_GET["password"], $_GET["password"]) || empty($_GET["username"]) || empty($_GET["username"]))
     {
-        header("location: paginaLogin.php?messaggio=Inserisci tutti i dati");
+        header("location: paginaLogin.php?messaggio=inserisci tutti i dati!");
         exit;
     }
 
@@ -15,12 +15,12 @@
         if($password == $_GET["password"])
             header("location: paginaHome.php");
         else
-            header("location: paginaLogin.php?messaggio=Password errata");
+            header("location: paginaLogin.php?messaggio=password errata!");
         exit;
     }
     else
     {
-        header("location: paginaLogin.php?messaggio=Utente non esistente");
+        header("location: paginaLogin.php?messaggio=utente non esistente!");
     }
 
 ?>

@@ -13,9 +13,9 @@
     <body>
     <div class="container">
         <?php
-        if (isset($_GET["messaggio"]) && !empty($_GET["messaggio"])) {
-            echo "<div class=messaggio>Messaggio: $_GET[messaggio]</div>";
-        }
+            if (isset($_GET["messaggio"]) && !empty($_GET["messaggio"])) {
+                echo "<div class=messaggio>Occhio, $_GET[messaggio]</div>";
+            }
         ?>
         <form action="gestoreLogin.php">
             <div>

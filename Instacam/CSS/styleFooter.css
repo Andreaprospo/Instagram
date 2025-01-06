@@ -75,3 +75,18 @@
         margin-bottom: 8px; /* Spaziatura più contenuta */
     }
 }
+
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Sfondo semitrasparente */
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}

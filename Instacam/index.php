@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login - SocialApp</title>
         <link rel="icon" href="iconaSito.png" type="image/png">
-        <link rel="stylesheet" href="CSS/styleMainPage.css">
+        <link rel="stylesheet" href="CSS/styleIndex.css">
     </head>
     <body>
         <div class="container">
