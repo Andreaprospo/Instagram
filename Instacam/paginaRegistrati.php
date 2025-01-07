@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="iconaSito.png" type="image/png">
+    <link rel="stylesheet" href="CSS/styleMessaggioErrore.css">
+    <link rel="stylesheet" href="CSS/styleFooter.css">
+    <link rel="stylesheet" href="CSS/stylePaginaRegistrati.css">
     <title>REGISTRAZIONE</title>
 </head>
 <body>
