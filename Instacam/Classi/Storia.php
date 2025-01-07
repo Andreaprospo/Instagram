@@ -2,7 +2,12 @@
 
     class Storia
     {
-        private $id, $estensione, $data, $username, $numeroVisualizzazioni, $giaVisto;
+        private $id;
+        private $estensione;
+        private $data;
+        private $username;
+        private $numeroVisualizzazioni;
+        private $giaVisto;
 
         public function __construct($username, $estensione, $data)
         {

@@ -3,7 +3,24 @@
 class Profilo
 {
     //io ho pensato a questi attributi privati (POI FAMMI SAPERE)
-    private $id, $nomeUtente, $mail, $password, $descrizione, $pathFoto, $seguiti = [], $followers = [], $post = [];
+    private $id;
+    private $nomeUtente;
+    private $mail;
+    private $password;
+    private $descrizione;
+    private $pathFoto;
+    private $seguiti = [];
+    private $followers = [];
+    private $post = [];
+    
+    //costruttore che ha pathFoto vuoto siccome non sempre deve essere passato
+    public function __construct($id, $mail, $password, $descrizione, $pathFoto = "") {
+        $this->id = $id;
+        $this->mail = $mail;
+        $this->password = $password;
+        $this->descrizione = $descrizione;
+        $this->pathFoto = $pathFoto;
+    }
 
     // SENZA controlli le set (NO CONTROLLI)
     public function getId()
@@ -54,33 +71,47 @@ class Profilo
     {
         $this->pathFoto = $pathFoto;
     }
-    public function getSeguiti()
-    {
-        return $this->seguiti;
-    }
+
     public function aggiungiSeguito($idSeguito)
     {
         if (!in_array($idSeguito, $this->seguiti)) {
             $this->seguiti[] = $idSeguito;
         }
     }
-    public function getFollowers()
-    {
-        return $this->followers;
-    }
+
     public function aggiungiFollower($idFollower)
     {
         if (!in_array($idFollower, $this->followers)) {
             $this->followers[] = $idFollower;
         }
     }
-    public function getPost()
-    {
-        return $this->post;
-    }
     public function aggiungiPost($post)
     {
         $this->post[] = $post;
+    }
+
+    public function getSeguiti() {
+        $stringaSeguiti = "";
+        for ($i = 0; $i < count($this->seguiti); $i++) {
+            $stringaSeguiti .= $this->seguiti[$i] . "\n";
+        }
+        return $stringaSeguiti;
+    }
+
+    public function getFollowers() {
+        $stringaFollowers = "";
+        for ($i = 0; $i < count($this->followers); $i++) {
+            $stringaFollowers .= $this->followers[$i] . "\n";
+        }
+        return $stringaFollowers;
+    }
+
+    public function getPost() {
+        $stringaPost = "";
+        for ($i = 0; $i < count($this->post); $i++) {
+            $stringaPost .= $this->post[$i] . "\n";
+        }
+        return $stringaPost;
     }
     public function toCSV()
     {
@@ -95,7 +126,8 @@ class Profilo
             $arrayDati = explode(";", $dati);
 
             //creare un costruttore per poter ritornare un oggetto Profilo
-            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4],  $arrayDati[5]);
+            //COSTRUTTORE FATTO
+            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4]);
         }
     }
 }

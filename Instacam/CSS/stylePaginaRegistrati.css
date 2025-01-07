@@ -1,0 +1,106 @@
+/* Stile generale per il body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif; /* Font moderno */
+    background: linear-gradient(135deg, #5a0000, #c40000); /* Gradiente rosso scuro intenso */
+    color: #ffffff; /* Colore del testo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altezza che occupa l'intera finestra */
+    overflow: hidden; /* Evita scrolling indesiderato */
+}
+
+/* Stile per il form */
+form {
+    background: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente */
+    padding: 30px 40px;
+    border-radius: 15px; /* Angoli arrotondati */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* Ombra più scura per maggiore contrasto */
+    backdrop-filter: blur(10px); /* Effetto blur */
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Bordo più evidente */
+    width: 100%;
+    max-width: 400px; /* Larghezza massima del form */
+}
+
+/* Stile per i div che contengono gli input */
+form div {
+    margin-bottom: 20px; /* Spaziatura tra i campi */
+}
+
+/* Stile per le label */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff; /* Colore bianco puro per maggiore leggibilità */
+}
+
+/* Stile per gli input */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Occupare tutta la larghezza del contenitore */
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px; /* Angoli arrotondati */
+    font-size: 16px;
+    color: #333; /* Colore del testo */
+    background: rgba(255, 255, 255, 0.9); /* Sfondo bianco semi-trasparente */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ombra leggera */
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Effetti al focus degli input */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 1); /* Sfondo bianco pieno */
+}
+
+/* Stile per il pulsante */
+button {
+    width: 100%;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #ff0000, #ff4500);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Colore del pulsante al passaggio del mouse */
+button:hover {
+    background: linear-gradient(135deg, #ff6347, #ff0000);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Colore del pulsante al click */
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsività per schermi piccoli */
+@media screen and (max-width: 400px) {
+    form {
+        padding: 20px; /* Ridurre il padding per schermi piccoli */
+    }
+
+    input[type="text"], input[type="email"], input[type="password"], button {
+        font-size: 14px;
+    }
+}

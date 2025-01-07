@@ -1,0 +1,58 @@
+-Index
+	-> Registrati
+		inserimento mail e password
+		-> Pagina Utente
+	-> Login
+		inserimento mail e password (controllo gia esistenti)
+		-> Home 
+		
+---- PAGINE ----	
+		
+index (registarti o login)
+paginaHome (post e storie, aggiunta commenti e like)
+paginaAddPost (upload foto e aggiunta descrizione e set vari parametri)
+paginaAddStoria (upload foto, creazione file)
+paginaProfilo (visualizzazione dati, post, seguiti e followers) ((Eliminazione profilo con pulsante))
+
+paginaRegistrati (mail, password, salvataggio informazioni file)
+paginaLogin (mail, password)
+
+gestoreLogin (controllo la correttezza della password e se l'utente esiste di già)
+gestoreRegistrati (non stesso nome utente e salvataggio dati) 
+gestoreLogout (pulisci tutto e rimanda alla index)
+gestorePaginaProfilo()
+gestorePaginaHome ()
+
+footer (home, aggiungiPost, tuoProfilo)
+
+----
+
+Post 
+	attributi:
+		pathFoto, data, numeroLike, commenti[], di chi è (profilo)
+	metodi:
+		public toCSV (scrivi su file)
+		public fromCSV (leggi da file)
+		public get e set [controlli]
+		private calcolaLike (trova tutti i like e conta)
+		
+Storia 
+	attributi:
+		pathFoto, data, di chi è (profilo), numeroVisualizzazione
+	metodi:
+		public toCSV (scrivi su file)
+		public fromCSV (leggi da file)
+		public get e set [controlli]
+		( public contaVisualizzazione )  
+
+Profilo
+	attributi:
+		nomeUtente, mail, password, descrizione, seguiti[], followers[], post[]
+	metodi: 
+		public toCSV (scrivi su file)
+		public fromCSV (leggi da file)
+		public get e set [controlli]
+		
+		
+gestore = pagina che non si vede
+pagina = pagina visibile all'utente 
