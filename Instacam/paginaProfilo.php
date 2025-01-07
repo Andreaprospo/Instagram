@@ -17,7 +17,7 @@
         $profilo = Profilo::fromCSV($username);
     ?>
     <div id="container">
-        <h1>Profilo di <?php echo $profilo->getNomeUtente(); ?></h1>
+        <h1>Profilo di <?php echo $profilo->getUsername(); ?></h1>
         <p>Email: <?php echo $profilo->getMail(); ?></p>
         <p>Descrizione: <?php echo $profilo->getDescrizione(); ?></p>
         <p>Seguiti: <?php echo $profilo->getSeguiti(); ?></p>

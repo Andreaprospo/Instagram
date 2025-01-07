@@ -13,20 +13,19 @@ class Profilo
     private $post = [];
     
     //costruttore che ha pathFoto vuoto siccome non sempre deve essere passato
-    public function __construct($username, $mail, $password, $descrizione, $pathFoto = "") {
+    public function __construct($username, $mail, $password, $descrizione) {
         $this->username = $username;
         $this->mail = $mail;
         $this->password = $password;
         $this->descrizione = $descrizione;
-        $this->pathFoto = $pathFoto;
+        $foto = "FileUtenti/$this->username/fotoProfilo.jpg";
+        if(!file_exists($foto))
+            $foto = "";
+        $this->pathFoto = $foto;
     }
 
     // SENZA controlli le set (NO CONTROLLI)
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-    public function getNomeUtente()
+    public function getUsername()
     {
         return $this->username;
     }
@@ -120,9 +119,11 @@ class Profilo
             $dati = file_get_contents("FileUtenti/$username/FileInfo.csv");
             $arrayDati = explode(";", $dati);
 
-            //creare un costruttore per poter ritornare un oggetto Profilo
-            //COSTRUTTORE FATTO
-            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], "fotoProfilo.jpg");
+            $foto = "fotoProfilo.jpg";
+            if(!file_exists($foto))
+                $foto = "";
+
+            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3]);
         }
     }
 }
