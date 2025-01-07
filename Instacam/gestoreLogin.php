@@ -11,9 +11,17 @@
 
     if(is_dir("FileUtenti/$username"))
     {
-        $password = Profilo::fromCSV($username)->getPassword();
+        $profilo = Profilo::fromCSV($username);
+        $password = $profilo->getPassword();
         if($password == $_GET["password"])
-            header("location: paginaHome.php");
+        {
+            if(!isset($_SESSION))
+                session_start();
+
+            $_SESSION["utenteCorrente"] = $profilo;
+            header("location:paginaHome.php");
+            exit;
+        }
         else
             header("location: paginaLogin.php?messaggio=password errata!");
         exit;
@@ -21,5 +29,7 @@
     else
     {
         header("location: paginaLogin.php?messaggio=utente non esistente!");
+        exit;
+
     }
 ?>

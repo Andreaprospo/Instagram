@@ -1,5 +1,11 @@
 <?php
     require_once "Classi/Storia.php";
+    require_once "Classi/Profilo.php";
+
+    if(!(isset($_SESSION)))
+        session_start();
+
+    $utenteCorrente = $_SESSION["utenteCorrente"];
 
     if (isset($_FILES["file"]) && !empty($_FILES["file"])) 
     {
@@ -17,7 +23,7 @@
 
         //nome utente che prendo dalla sessione 
         //$username = $_SESSION["utente"];
-        $username = "Marco";
+        $username = $utenteCorrente->getUsername();
         $pathUtente = "FileUtenti/$username";
         $pathCartellaFoto = "$pathUtente/FotoStoria";
 

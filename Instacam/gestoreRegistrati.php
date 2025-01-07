@@ -24,13 +24,15 @@ if (isset($_GET["pathFoto"])) {
     $pathFoto = "";
 }
 
-if (is_dir("FileUtenti/$username")) {
+$pathUtente = "FileUtenti/$username";
+if (is_dir($pathUtente)) {
     header("location: paginaRegistrazione.php?messaggio=utente già esistente!");
     exit;
 } else {
-    mkdir($pathUtente, 0777, true);
-    $profilo = new Profilo($username, $username, $email, $password, $descrizione, $pathFoto);
-    $profilo->toCSV("FileUtenti/$username/profilo.csv");
+    $profilo = new Profilo($username, $mail, $password, "");
+    $profilo->creaGerarchia();
+    $profilo->toCSV();
+
     header("location: paginaLogin.php?messaggio=registrazione avvenuta con successo!");
     exit;
 }

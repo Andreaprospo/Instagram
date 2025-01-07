@@ -11,6 +11,8 @@ class Profilo
     private $seguiti = [];
     private $followers = [];
     private $post = [];
+    private $stories = [];
+    
     
     //costruttore che ha pathFoto vuoto siccome non sempre deve essere passato
     public function __construct($username, $mail, $password, $descrizione) {
@@ -22,6 +24,7 @@ class Profilo
         if(!file_exists($foto))
             $foto = "";
         $this->pathFoto = $foto;
+        $this->seguiti = $this->getSeguiti();
     }
 
     // SENZA controlli le set (NO CONTROLLI)
@@ -66,51 +69,83 @@ class Profilo
         $this->pathFoto = $pathFoto;
     }
 
-    public function aggiungiSeguito($idSeguito)
+    public function aggiungiSeguito($username)
     {
-        if (!in_array($idSeguito, $this->seguiti)) {
-            $this->seguiti[] = $idSeguito;
+        if (!in_array($username, $this->seguiti)) {
+            $this->seguiti[] = $username;
+            file_put_contents("FileUtenti/$this->username/FileSeguiti.csv", $username . "\n", FILE_APPEND);
+            file_put_contents("FileUtenti/$username/FileFollowers.csv", $this->username . "\n",FILE_APPEND);
         }
     }
 
-    public function aggiungiFollower($idFollower)
-    {
-        if (!in_array($idFollower, $this->followers)) {
-            $this->followers[] = $idFollower;
-        }
-    }
+    // public function aggiungiFollower($username)
+    // {
+    //     if (!in_array($username, $this->followers)) {
+    //         $this->followers[] = $username;
+    //     }
+    // }
     public function aggiungiPost($post)
     {
         $this->post[] = $post;
     }
 
     public function getSeguiti() {
-        $stringaSeguiti = "";
-        for ($i = 0; $i < count($this->seguiti); $i++) {
-            $stringaSeguiti .= $this->seguiti[$i] . "\n";
+
+        $info = file_get_contents("FileUtenti/$this->username/FileSeguiti.csv");
+        $allUsernameUser = explode( "\n", $info);
+        $allUser = [];
+        foreach ($allUsernameUser as $username) {
+            if($username == null)
+                continue;
+            $allUser[] = Profilo::fromCSV($username);
         }
-        return $stringaSeguiti;
+        $this->seguiti = $allUser;
+        return $this->seguiti ;
+
     }
 
     public function getFollowers() {
-        $stringaFollowers = "";
-        for ($i = 0; $i < count($this->followers); $i++) {
-            $stringaFollowers .= $this->followers[$i] . "\n";
+
+        $info = file_get_contents("FileUtenti/$this->username/FileFollowers.csv");
+        $allUsernameUser = explode( "\n", $info);
+        $allUser = [];
+        foreach ($allUsernameUser as $username) {
+            if($username == null)
+                continue;
+            $allUser[] = Profilo::fromCSV($username);
         }
-        return $stringaFollowers;
+        $this->followers = $allUser;
+        return $this->followers ;
     }
 
     public function getPost() {
-        $stringaPost = "";
+        $vettorePost = [];
         for ($i = 0; $i < count($this->post); $i++) {
-            $stringaPost .= $this->post[$i] . "\n";
+            $vettorePost[] = $this->post[$i];
         }
-        return $stringaPost;
+        return $vettorePost;
+    }
+    public function getStories() {
+
+        $allStories = [];
+        $info = file_get_contents("FileUtenti/$this->username/FilePubblicazione.csv");
+        $allPubblicazione = explode("\n", $info);
+        foreach($allPubblicazione as $pubblicazione)
+        {
+            if($pubblicazione == null)
+                continue;
+            $campi = explode(";", $pubblicazione);
+            if($campi[1] == "STORIA")
+                $allStories[] = $pubblicazione;
+        }
+        $this->stories = $allStories;
+        return $this->stories;
+
     }
     public function toCSV()
     {
-        $path = "../FileUtenti/$this->username/FileInfo.csv";
-        $dati = "$this->username;$this->mail;$this->password;$this->descrizione;$this->pathFoto";
+        $path = "FileUtenti/$this->username/FileInfo.csv";
+        $dati = "$this->username;$this->mail;$this->password;$this->descrizione";
         file_put_contents($path, $dati);
     }
     public static function fromCSV($username)
@@ -125,5 +160,19 @@ class Profilo
 
             return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3]);
         }
+    }
+
+    public function creaGerarchia()
+    {
+        $pathUtente = "FileUtenti/$this->username";
+        mkdir($pathUtente, 0777, true); 
+        mkdir($pathUtente . "/CartellaCommenti", 0777, true); 
+        mkdir($pathUtente . "/FotoPost", 0777, true); 
+        mkdir($pathUtente . "/FotoStoria", 0777, true); 
+        file_put_contents($pathUtente . "/FileFollowers.csv", "", FILE_APPEND);
+        file_put_contents($pathUtente . "/FileInfo.csv", "", FILE_APPEND);
+        file_put_contents($pathUtente . "/FileLikePost.csv", "", FILE_APPEND);
+        file_put_contents($pathUtente . "/FilePubblicazione.csv", "", FILE_APPEND);
+        file_put_contents($pathUtente . "/FileSeguiti.csv", "", FILE_APPEND);
     }
 }
