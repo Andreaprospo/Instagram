@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="iconaSito.png" type="image/png">
     <link rel="stylesheet" href="CSS/styleProfilo.css">
+    <link rel="stylesheet" href="CSS/styleFooter.css">
     <title>Profilo</title>
 </head>
 <body>

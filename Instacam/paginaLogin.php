@@ -9,23 +9,23 @@
     <title>Pagina Login</title>
 </head>
     <body>
-    <div class="container">
-        <?php
-            if (isset($_GET["messaggio"]) && !empty($_GET["messaggio"])) {
-                echo "<div class=messaggio>Occhio, $_GET[messaggio]</div>";
-            }
-        ?>
-        <form action="gestoreLogin.php">
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id = "username" name = "username">
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="text" id = "password" name = "password">
-            </div>
-            <button>Manda</button>
-        </form>
+        <div class="container">
+            <?php
+                if (isset($_GET["messaggio"]) && !empty($_GET["messaggio"])) {
+                    echo "<div class=messaggio>Occhio, $_GET[messaggio]</div>";
+                }
+            ?>
+            <form action="gestoreLogin.php">
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" id = "username" name = "username">
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="text" id = "password" name = "password">
+                </div>
+                <button>Manda</button>
+            </form>
         </div>
     </body>
 </html>
