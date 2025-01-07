@@ -3,8 +3,7 @@
 class Profilo
 {
     //io ho pensato a questi attributi privati (POI FAMMI SAPERE)
-    private $id;
-    private $nomeUtente;
+    private $username;
     private $mail;
     private $password;
     private $descrizione;
@@ -14,8 +13,8 @@ class Profilo
     private $post = [];
     
     //costruttore che ha pathFoto vuoto siccome non sempre deve essere passato
-    public function __construct($id, $mail, $password, $descrizione, $pathFoto = "") {
-        $this->id = $id;
+    public function __construct($username, $mail, $password, $descrizione, $pathFoto = "") {
+        $this->username = $username;
         $this->mail = $mail;
         $this->password = $password;
         $this->descrizione = $descrizione;
@@ -23,21 +22,17 @@ class Profilo
     }
 
     // SENZA controlli le set (NO CONTROLLI)
-    public function getId()
-    {
-        return $this->id;
-    }
     public function setId($id)
     {
         $this->id = $id;
     }
     public function getNomeUtente()
     {
-        return $this->nomeUtente;
+        return $this->username;
     }
-    public function setNomeUtente($nomeUtente)
+    public function setUsername($username)
     {
-        $this->nomeUtente = $nomeUtente;
+        $this->username = $username;
     }
     public function getMail()
     {
@@ -115,8 +110,8 @@ class Profilo
     }
     public function toCSV()
     {
-        $path = "../FileUtenti/$this->id/FileInfo.csv";
-        $dati = "$this->id;$this->nomeUtente;$this->mail;$this->password;$this->descrizione;$this->pathFoto";
+        $path = "../FileUtenti/$this->username/FileInfo.csv";
+        $dati = "$this->username;$this->mail;$this->password;$this->descrizione;$this->pathFoto";
         file_put_contents($path, $dati);
     }
     public static function fromCSV($username)
@@ -127,7 +122,7 @@ class Profilo
 
             //creare un costruttore per poter ritornare un oggetto Profilo
             //COSTRUTTORE FATTO
-            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4]);
+            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], "fotoProfilo.jpg");
         }
     }
 }
