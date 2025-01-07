@@ -22,5 +22,4 @@
     {
         header("location: paginaLogin.php?messaggio=utente non esistente!");
     }
-
 ?>

@@ -3,8 +3,6 @@
 
     if (isset($_FILES["file"]) && !empty($_FILES["file"])) 
     {
-        
-
         //prendo info dal file
         $fileTmpPath = $_FILES["file"]["tmp_name"];
         $fileName = $_FILES["file"]["name"];
@@ -14,17 +12,14 @@
             header("location: paginaAddStoria.php?messaggio=nessun file caricato!");
             exit;
         }
-            
-      
+        
         $estensioneFile = explode(".", $fileName)[1];
-        //
 
         //nome utente che prendo dalla sessione 
         //$username = $_SESSION["utente"];
         $username = "Marco";
         $pathUtente = "FileUtenti/$username";
         $pathCartellaFoto = "$pathUtente/FotoStoria";
-        //
 
         //crea la cartella se non esiste
         if (!is_dir($pathCartellaFoto)) {
