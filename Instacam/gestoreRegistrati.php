@@ -1,14 +1,14 @@
 <?php
 require_once "Classi/Profilo.php";
 
-if (!isset($_GET["username"], $_GET["password"], $_GET["email"]) || empty($_GET["username"]) || empty($_GET["password"]) || empty($_GET["email"])) {
+if (!isset($_GET["username"], $_GET["password"], $_GET["mail"]) || empty($_GET["username"]) || empty($_GET["password"]) || empty($_GET["mail"])) {
     header("location: paginaRegistrazione.php?messaggio=inserisci tutti i dati!");
     exit;
 }
 
 $username = $_GET["username"];
 $password = $_GET["password"];
-$email = $_GET["email"];
+$mail = $_GET["mail"];
 
 //nel caso in cui non mette descrizione allora lascio vuoto
 if (isset($_GET["descrizione"])) {

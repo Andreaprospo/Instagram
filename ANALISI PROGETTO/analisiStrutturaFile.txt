@@ -5,16 +5,16 @@ FILEUTENTI
         ->FILEPUBBLICAZIONE
         ->FILELIKEPOST
         ->CARTELLACOMMENTI (cartella) 
-	  -> id.csv (con all'interno commenti)
+			-> id.csv (con all'interno commenti)
         ->FILELIKESTORIA
-	->FOTOPOST (cartella)
-	  -> foto (esempio foto)
-	  -> foto ""
-	  -> foto ""
-	->FOTOSTORIA (cartella)
-	  -> foto (esempio foto)
-	  -> foto ""
-	  -> foto ""
+		->FOTOPOST (cartella)
+			-> foto (esempio foto)
+			-> foto ""
+			-> foto ""
+		->FOTOSTORIA (cartella)
+			-> foto (esempio foto)
+			-> foto ""
+			-> foto ""
 
 guardare esempio Marco, inserito nella Creazione pagina gestoreAddStoria (27/12/24)
 
