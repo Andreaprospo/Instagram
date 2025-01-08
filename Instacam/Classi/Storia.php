@@ -7,15 +7,17 @@
         private $data;
         private $username;
         private $numeroVisualizzazioni;
+        private $pathFoto;
         private $giaVisto;
 
-        public function __construct($username, $estensione, $data)
+        public function __construct($id, $username, $estensione, $data)
         {
-            $this->id = $this->getLastId($username);
+            $this->id = $id;
             $this->estensione = $estensione;
             $this->data = $data;
             $this->username = $username;
             $this->numeroVisualizzazioni = 0;
+            $this->pathFoto = Storia::extractPathFoto($id, $username);
         }
         public function toCSV()
         {
@@ -34,7 +36,7 @@
                 foreach ($righe as $riga) {
                     $campi = explode(";", $riga);
                     if($campi[0] == $id)
-                        return new Storia($campi[2], $campi[3], $campi[4]);
+                        return new Storia($id, $campi[2], $campi[3], $campi[4]);
                 }
             }
             return null;
@@ -62,6 +64,10 @@
         public function getGiaVisto()
         {
             return $this->giaVisto;
+        }
+        public function getPathFoto()
+        {
+            return $this->pathFoto;
         }
         //-----------------//
 
@@ -100,6 +106,18 @@
             }
             closedir($uploadDir);
             return $lastId;
+        }
+
+        //-----------------//
+
+        public static function parse($campi)
+        {
+            return new Storia($campi[0], $campi[2], $campi[3], $campi[4]);
+        }
+
+        private function extractPathFoto($id, $username)
+        {
+            return "FileUtenti/$username/FotoStoria/$id.$this->estensione";
         }
    }
 ?>

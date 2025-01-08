@@ -1,38 +1,68 @@
 /* Stile base per il suggerimento */
 #divSuggerimenti {
-position: absolute;
-width: 200px;
-background-color: #ffffff;
-border: 1px solid #ddd;
-border-radius: 5px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-z-index: 10;
-display: none; /* Nascosto di default */
+    position: absolute;
+    width: 200px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: block; /* Nascosto di default */
 }
 
 /* Stile per i singoli suggerimenti */
 #divSuggerimenti > div {
-padding: 10px;
-cursor: pointer;
+    padding: 10px;
+    cursor: pointer;
 }
 
 #divSuggerimenti > div:hover {
-background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 /* Input di esempio */
 #barraRicerca {
-width: 200px;
-padding: 10px;
-font-size: 16px;
-border: 1px solid #ddd;
-border-radius: 5px;
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-#divStoria
+.divStoria
 {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 65%;
+    border: #adb300 2px solid;
+    margin-left: 10px;
+}
+
+.fotoProfilo
+{
+    width: 70px;
+    height: 100%;
+    border-radius: 100px;
+}
+
+.coperta
+{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 100px;
+    display: none;
+}
+
+.scoperta
+{
+    display: block;
+    position:absolute;
+    /* top: 0px; */
+    left: 300px;
+    top: 175px;
+    height: 70%;
+    width: 65%;
 }
 
 .popup {
@@ -68,4 +98,27 @@ button:hover {
     font-weight: bold;
     color: #333;
     margin-right: 10px; /* Adds space between text and button */
+}
+
+#divBarraRicerca
+{
+    height: 85%;
+    width: 300px;
+    margin-top: 10px;
+    border: #0056b3 2px solid;
+}
+
+#container
+{
+    height: 90%;
+}
+
+#divStorie 
+{
+    height: 15%;
+    width: 100%;
+    border: #b30054 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
