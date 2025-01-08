@@ -12,10 +12,19 @@
     <?php
         require_once "Classi/Profilo.php";
         require_once "Classi/Post.php";
-        //TODO: prendere l'username dall'utente loggato
-        $username = "Marco";
+
+        //variabile appoggio
+        $username = $_GET["utente"];
+        //piglio il profilo dall'username
         $profilo = Profilo::getProfiloDaUsername($username);
     ?>
+
+    <div id="header">
+        <a href="paginaHome.php">HOME</a>
+        <a href="paginaAddPost.php">AGGIUNGI POST</a>
+        <a href="paginaAddStoria.php">AGGIUNGI STORIA</a>
+    </div>
+
     <div id="container">
         <h1>Profilo di <?php echo $profilo->getUsername(); ?></h1>
         <p>Email: <?php echo $profilo->getMail(); ?></p>

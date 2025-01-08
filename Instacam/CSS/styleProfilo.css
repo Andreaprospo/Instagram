@@ -25,6 +25,31 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.3); /* Bordo più evidente */
 }
 
+/* Stile per il header */
+#header {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente */
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombra leggera */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Bordo inferiore */
+}
+
+#header a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+#header a:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
 /* Stile per i titoli */
 h1, h2 {
     text-align: center;
@@ -48,7 +73,7 @@ img {
 }
 
 /* Stile per il contenitore dei post */
-#container2 {
+#post-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;

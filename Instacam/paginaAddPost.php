@@ -16,13 +16,13 @@
             }
         ?>
         <div id="container">
-            <form action="gestoreAddPost.php" method="post" enctype="multipart/form-data" id="form">
+            <form action="gestoreAddPost.php" method="get" enctype="multipart/form-data" id="form">
                 <div>
-                    <label for="file">seleziona una foto:</label>
+                    <label for="file">SELEZIONA UNA FOTO:</label>
                     <input type="file" name="file" id="file">
                 </div>
                 <div>
-                    <label for="descrizione">descrizione</label>
+                    <label for="descrizione">DESCRIZIONE</label>
                     <textarea name="descrizione" id="descrizione" rows="4" cols="50"></textarea>
                 </div>
                 <button type="submit">POSTA</button>

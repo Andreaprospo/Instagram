@@ -25,7 +25,7 @@ class Profilo
         $this->seguiti = $this->getSeguiti();
     }
     public static function getProfiloDaUsername($username) {
-        $pathProfilo = "FileUtenti/$username/profilo.csv";
+        $pathProfilo = "FileUtenti/$username/FileInfo.csv";
         if (file_exists($pathProfilo)) {
             $dati = file_get_contents($pathProfilo);
             $dati = explode(";", $dati);
