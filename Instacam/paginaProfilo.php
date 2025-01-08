@@ -14,20 +14,39 @@
         require_once "Classi/Post.php";
         //TODO: prendere l'username dall'utente loggato
         $username = "Marco";
-        $profilo = Profilo::fromCSV($username);
+        $profilo = Profilo::getProfiloDaUsername($username);
     ?>
     <div id="container">
         <h1>Profilo di <?php echo $profilo->getUsername(); ?></h1>
         <p>Email: <?php echo $profilo->getMail(); ?></p>
         <p>Descrizione: <?php echo $profilo->getDescrizione(); ?></p>
-        <p>Seguiti: <?php print_r($profilo->getSeguiti()); ?></p>
-        <p>Followers: <?php print_r($profilo->getFollowers()); ?></p>
-        <img src="<?php echo $profilo->getPathFoto(); ?>">
+
+        <h2>Seguiti</h2>
+        <ul>
+            <?php
+                $seguiti = $profilo->getSeguiti();
+                foreach ($seguiti as $seguito) {
+                    echo "<li>" . htmlspecialchars($seguito) . "</li>";
+                }
+            ?>
+        </ul>
+
+        <h2>Followers</h2>
+        <ul>
+            <?php
+                $followers = $profilo->getFollowers();
+                foreach ($followers as $follower) {
+                    echo "<li>" . htmlspecialchars($follower) . "</li>";
+                }
+            ?>
+        </ul>
+
+        <img src="<?php echo $profilo->getPathFoto(); ?>" alt="Foto Profilo">
 
         <h2>Post</h2>
-        <div id="post-container">
+        <div id="container2">
             <?php
-                $posts = Post::getPostsByUser($username);
+                $posts = Post::getPostsDaUser($username);
                 foreach ($posts as $post) {
                     echo "<div class='post'>";
                     echo "<img src='" . $post->getPathFoto() . "'>";

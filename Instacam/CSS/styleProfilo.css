@@ -48,7 +48,7 @@ img {
 }
 
 /* Stile per il contenitore dei post */
-#post-container {
+#container2 {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
