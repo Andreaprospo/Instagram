@@ -11,6 +11,14 @@ class Post
     private $pathFileCommentiPost;
     private $pathFileLikePost;
     private $giaVisto;
+    public function __construct($nomeUtente, $estensioneFile, $dataPubblicazione, $descrizione = "")
+    {
+        $this->idProfilo = $nomeUtente;
+        $this->pathFoto = $estensioneFile;
+        $this->data = $dataPubblicazione;
+        $this->descrizione = $descrizione;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -158,20 +166,38 @@ class Post
         return $idMassimo;
     }
 
-    public static function getPostsByUser($nomeUtente) {
+    public static function getPostsDaUser($nomeUtente) {
         $percorsoCartellaFoto = "FileUtenti/$nomeUtente/FotoPost";
+        $percorsoDescrizioni = "FileUtenti/$nomeUtente/descrizioni.csv";
         $post = [];
+        $descrizioni = [];
+        
+
+        if (file_exists($percorsoDescrizioni)) {
+            $fileDescrizioni = file($percorsoDescrizioni);
+            foreach ($fileDescrizioni as $linea) {
+                list($idPost, $descrizione) = str_getcsv($linea);
+                $descrizioni[$idPost] = $descrizione;
+            }
+        }
     
         if (is_dir($percorsoCartellaFoto)) {
             $fileFoto = scandir($percorsoCartellaFoto);
             foreach ($fileFoto as $elementoFile) {
                 if ($elementoFile != '.' && $elementoFile != '..') {
-                    $partiFile = explode('.', $elementoFile);
+                    $partiFile = explode(';', $elementoFile);
                     if (count($partiFile) > 1 && is_numeric($partiFile[0])) {
                         $idPost = (int)$partiFile[0];
-                        $estensioneFile = end($partiFile); //siccome non so che tipo di file mi carica allora devo fare così 
+                        $estensioneFile = end($partiFile);
                         $dataPubblicazione = date("Y-m-d H:i:s", filemtime("$percorsoCartellaFoto/$elementoFile"));
-                        $descrizione = ""; //TODO: leggere la descrizione dal file
+                        $descrizione = ""; 
+    
+                        //lettura della descrizione dal file
+                        $pathDescrizione = "FileUtenti/$nomeUtente/DescrizioniPost/{$idPost}.txt";
+                        if (file_exists($pathDescrizione)) {
+                            $descrizione = file_get_contents($pathDescrizione);
+                        }
+    
                         $post[] = new Post($nomeUtente, $estensioneFile, $dataPubblicazione, $descrizione);
                     }
                 }

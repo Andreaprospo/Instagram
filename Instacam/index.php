@@ -7,7 +7,6 @@
         header("location: paginaHome.php");
         exit;
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

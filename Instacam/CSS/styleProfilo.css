@@ -1,0 +1,116 @@
+/* Stile generale per il body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif; /* Font moderno */
+    background: linear-gradient(135deg, #5a0000, #c40000); /* Gradiente rosso scuro intenso */
+    color: #ffffff; /* Colore del testo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Altezza minima che occupa l'intera finestra */
+}
+
+/* Stile per il contenitore principale */
+#container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente */
+    padding: 30px 40px;
+    border-radius: 15px; /* Angoli arrotondati */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* Ombra più scura per maggiore contrasto */
+    backdrop-filter: blur(10px); /* Effetto blur */
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Bordo più evidente */
+}
+
+/* Stile per i titoli */
+h1, h2 {
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Stile per i paragrafi */
+p {
+    font-size: 16px;
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+/* Stile per le immagini del profilo */
+img {
+    display: block;
+    margin: 0 auto;
+    max-width: 150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Stile per il contenitore dei post */
+#post-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Stile per i singoli post */
+.post {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Stile per le immagini dei post */
+.post img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Stile per il pulsante di eliminazione del profilo */
+button {
+    width: 100%;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #ff0000, #ff4500);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    margin-top: 20px;
+}
+
+/* Colore del pulsante al passaggio del mouse */
+button:hover {
+    background: linear-gradient(135deg, #ff6347, #ff0000);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Colore del pulsante al click */
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsività per schermi piccoli */
+@media screen and (max-width: 600px) {
+    #container {
+        padding: 20px;
+    }
+
+    .post {
+        width: 100%;
+    }
+}

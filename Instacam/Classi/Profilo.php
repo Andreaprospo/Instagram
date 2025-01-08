@@ -13,8 +13,6 @@ class Profilo
     private $post = [];
     private $stories = [];
     
-    
-    //costruttore che ha pathFoto vuoto siccome non sempre deve essere passato
     public function __construct($username, $mail, $password, $descrizione) {
         $this->username = $username;
         $this->mail = $mail;
@@ -26,6 +24,22 @@ class Profilo
         $this->pathFoto = $foto;
         $this->seguiti = $this->getSeguiti();
     }
+    public static function getProfiloDaUsername($username) {
+        $pathProfilo = "FileUtenti/$username/profilo.csv";
+        if (file_exists($pathProfilo)) {
+            $dati = file_get_contents($pathProfilo);
+            $dati = explode(";", $dati);
+            return new Profilo(
+                $dati[0],
+                $dati[1],
+                $dati[2],
+                $dati[3],
+            );
+        } else {
+            return null;
+        }
+    }
+    
 
     // SENZA controlli le set (NO CONTROLLI)
 
