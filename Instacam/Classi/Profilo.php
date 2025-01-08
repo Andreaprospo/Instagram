@@ -22,10 +22,6 @@ class Profilo
     }
 
     // SENZA controlli le set (NO CONTROLLI)
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
     public function getNomeUtente()
     {
         return $this->username;
