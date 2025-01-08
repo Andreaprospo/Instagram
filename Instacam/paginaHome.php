@@ -77,7 +77,7 @@
                                 
                                 foreach ($storiesSeguito as $storia) {
                                     echo "<div id = divStoriaNascosta>";
-                                    echo "<img src=" . $storia->getPathFoto() . " id= " . $seguito->getUsername() ." class=coperta>";
+                                        echo "<img src=" . $storia->getPathFoto() . " id= " . $storia->getIdStoria() ." class=coperta>";
                                     echo "</div>";
                                 }
                             echo "</div>";
@@ -118,31 +118,40 @@
 <script>
 
     let divStorie = document.querySelectorAll(".divStoria");
-
     console.log(divStorie);
-
 
     for (const storia of divStorie) {
 
         
         storia.addEventListener("click", function(e)
         {
-            console.log(e);
             let idTarget = e.target.id;
-            let storieNascoste = document.querySelectorAll("#" + idTarget + " #divStoriaNascosta .coperta");
-            if(storieNascoste.length == 0)
+            let allStories =document.querySelectorAll("#" + e.target.id);
+            let storiaSelezionata = document.querySelectorAll("#" + idTarget + " #divStoriaNascosta");
+            
+            function cambiaImmagine()
             {
-                storieNascoste = document.querySelectorAll("#" + idTarget + " #divStoriaNascosta .scoperta");
+                console.log("Inizio change");
+                console.log(idTarget);
+                console.log(document.querySelector("#" + (idTarget)+ " #divStoriaNascosta .scoperta"));
+                let storiaScoperta = document.querySelector("#" + idTarget + " #divStoriaNascosta .scoperta");
+                if(storiaScoperta != null)
+                {
+                    storiaScoperta.className = "coperta";
+                    console.log("scoperta");
+                }
+
+                console.log(document.querySelector("#" + (idTarget+1) + " #divStoriaNascosta .coperta"));
+                let prossimaStoria = document.querySelector("#" + (idTarget+1)+ " #divStoriaNascosta .coperta");
+                if(prossimaStoria != null)
+                {
+                    prossimaStoria.className = "scoperta";
+                    console.log("scoperta");
+                }
             }
-                
-            console.log(storieNascoste);
-            for (const storiaNascosta of storieNascoste) 
-            {
-                if(storiaNascosta.className == "scoperta")
-                    storiaNascosta.classList = "coperta";
-                else
-                    storiaNascosta.className = "scoperta";
-            }
+
+            // Avvia il ciclo
+            setTimeout(cambiaImmagine, 2000);
         })
     }
 
