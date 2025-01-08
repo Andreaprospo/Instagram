@@ -93,7 +93,7 @@ class Post
 
     public function toCSV()
     {
-        $path = "../FileUtenti/$this->idProfilo/FilePost/$this->id.csv";
+        $path = "FileUtenti/$this->idProfilo/FilePost/$this->id.csv";
         $dati = "$this->id;$this->idProfilo;$this->descrizione;$this->pathFoto;$this->luogo;$this->data;$this->pathFileCommentiPost;$this->pathFileLikePost;$this->giaVisto";
         file_put_contents($path, $dati);
     }

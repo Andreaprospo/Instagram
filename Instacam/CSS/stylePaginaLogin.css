@@ -40,7 +40,7 @@ label {
 }
 
 /* Stile per gli input */
-input[type="text"] {
+input{
     width: 100%; /* Occupare tutta la larghezza del contenitore */
     padding: 12px 15px;
     border: none;
@@ -54,7 +54,7 @@ input[type="text"] {
 }
 
 /* Effetti al focus degli input */
-input[type="text"]:focus {
+input:focus {
     outline: none; /* Rimuovere il bordo esterno */
     transform: scale(1.05); /* Leggero ingrandimento */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Ombra più pronunciata */
@@ -96,7 +96,7 @@ button:active {
         padding: 20px; /* Ridurre il padding per schermi piccoli */
     }
 
-    input[type="text"], button {
+    input, button {
         font-size: 14px; /* Ridurre la dimensione del testo */
     }
 }
