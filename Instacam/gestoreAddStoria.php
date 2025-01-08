@@ -57,7 +57,7 @@
         //
 
         //aggiungo una nuova dupla nel file FilePubblicazioni.csv
-        $storia  = new Storia($username, $estensioneFile, $infoDataPubblicazione);
+        $storia  = new Storia($idStoria, $username, $estensioneFile, $infoDataPubblicazione);
         $storia->toCSV();
         header("location: paginaHome.php?popup=storia caricata con successo");
     } 

@@ -4,13 +4,51 @@
     if(!isset($_SESSION))
         session_start();
     
-    $utenteCorrente = $_SESSION["utenteCorrente"];
-    if($utenteCorrente == null)
+    $utenteCorrente = "";
+    if(isset($_SESSION["utenteCorrente"]))
+        $utenteCorrente = $_SESSION["utenteCorrente"];
+    else
     {
         header("location: index.php");
         exit;
     }
+
     echo $utenteCorrente->getUsername();
+?>
+<?php
+    function getAllUtenti()
+    {
+        require_once "Classi/Profilo.php";  
+        if(!isset($_SESSION))
+            session_start();
+    
+        $utenteCorrente = $_SESSION["utenteCorrente"];
+
+        $usernameUtenteCorrente = $utenteCorrente->getUsername();
+        if (is_dir("./FileUtenti")) {
+            $allUsers = scandir("./FileUtenti");
+            $vettoreAppoggio = [];
+            foreach ($allUsers as $user) {
+                if ($user != '.' && $user != '..' && $user != $usernameUtenteCorrente) {
+                    $vettoreAppoggio[] = $user;
+                }
+            }
+        }
+        return $vettoreAppoggio;
+    }
+
+    function checkUsername($array, $user)
+    {
+        foreach ($array as $userInArray) {
+            if($userInArray == null)
+            {
+                continue;
+            }
+            if($user == $userInArray->getUsername())
+                return true; 
+        }
+        return false;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,23 +64,48 @@
         <div id = "container">
             <div id = "divStorie">
                 <?php
+                    require_once "Classi/Storia.php";
                     $allSeguiti = $utenteCorrente->getSeguiti();
                     foreach ($allSeguiti as $seguito) {
+                        if($seguito == null)
+                            continue;
                         $storiesSeguito = $seguito->getStories();
-                        print_r($storiesSeguito);
                         if($storiesSeguito != null)
                         {
-                            echo "<div id = divStoria>";
-                                echo "<img src=$seguito->getPathFoto() alt=>";
+                            echo "<div id = " . $seguito->getUsername() .  " class = divStoria >";
+                                echo "<img src=" . $seguito->getPathFoto() . " id= " . $seguito->getUsername() ." class=fotoProfilo>";
+                                
+                                foreach ($storiesSeguito as $storia) {
+                                    echo "<div id = divStoriaNascosta>";
+                                    echo "<img src=" . $storia->getPathFoto() . " id= " . $seguito->getUsername() ." class=coperta>";
+                                    echo "</div>";
+                                }
                             echo "</div>";
                         }
                     }
                 ?>
             </div>
-            <form action="gestoreAggiungiSeguiti.php" id = "formSuggerimenti">
-                <div id = "divBarraRicerca">
-                    <input type="text" id="barraRicerca">
-                    <div id = "divSuggerimenti"></div>
+            <div id = "divBarraRicerca">
+                <input type="text" id="barraRicerca">
+                <button onclick="filtra()">Cerca</button>
+                <form action="gestoreAggiungiSeguiti.php" id = "formSuggerimenti">
+                    <div id = "divSuggerimenti">
+                        <?php
+
+                            $allUtenti = getAllUtenti();
+                            $allSeguiti = $utenteCorrente->getSeguiti();
+
+                            foreach ($allUtenti as $utente)
+                            {
+                                if(checkUsername($allSeguiti, $utente) || $utente == $utenteCorrente)
+                                    continue;
+                                echo "<div class = popup username = $utente>";
+                                    echo "<div>$utente</div>";
+                                    echo "<button name = username value = $utente>Segui</button>";
+                                echo "</div>";
+                            }
+                        ?>
+                    </div>
                 </div>
             </form>
         </div>
@@ -51,77 +114,69 @@
         ?>
     </body>
 </html>
-<script>    
-    console.log("CIOA");
-    let barraRicerca = document.querySelector("#barraRicerca");
-    let divBarraRicerca = document.querySelector("#divBarraRicerca");
 
-    barraRicerca.addEventListener("focusout", function()
-    {
+<script>
+
+    let divStorie = document.querySelectorAll(".divStoria");
+
+    console.log(divStorie);
+
+
+    for (const storia of divStorie) {
+
         
-        <?php
-            function getAllUtenti()
+        storia.addEventListener("click", function(e)
+        {
+            console.log(e);
+            let idTarget = e.target.id;
+            let storieNascoste = document.querySelectorAll("#" + idTarget + " #divStoriaNascosta .coperta");
+            if(storieNascoste.length == 0)
             {
-                require_once "Classi/Profilo.php";  
-                if(!isset($_SESSION))
-                    session_start();
-            
-                $utenteCorrente = $_SESSION["utenteCorrente"];
-
-                $usernameUtenteCorrente = $utenteCorrente->getUsername();
-                if (is_dir("FileUtenti")) {
-                    $allUsers = scandir("FileUtenti");
-                    $vettoreAppoggio = [];
-                    foreach ($allUsers as $user) {
-                        if ($user != '.' && $user != '..' && $user != $usernameUtenteCorrente) {
-                            $vettoreAppoggio[] = $user;
-                        }
-                    }
-                }
-                return $vettoreAppoggio;
+                storieNascoste = document.querySelectorAll("#" + idTarget + " #divStoriaNascosta .scoperta");
             }
-        ?>
+                
+            console.log(storieNascoste);
+            for (const storiaNascosta of storieNascoste) 
+            {
+                if(storiaNascosta.className == "scoperta")
+                    storiaNascosta.classList = "coperta";
+                else
+                    storiaNascosta.className = "scoperta";
+            }
+        })
+    }
 
-        //chiesto a chatGpt così non vado a salvari gli utenti su un file ma li prendo direttamente tramite le cartelle
+</script>
 
-        const fileUtenti = <?php echo json_encode(getAllUtenti());?>;
-        const fileUtentiSeguiti = <?php echo json_encode($utenteCorrente->getSeguiti());?>;
-        const utenteCorrente = "<?php echo $utenteCorrente->getUsername() ?>";
-        console.log(fileUtenti);
+<script>
+
+    function filtra()
+    {
+        let testo = document.querySelector("#barraRicerca").value.toLowerCase();
+
+        let allDivUtenti = document.querySelectorAll("#divBarraRicerca #divSuggerimenti .popup");
+        console.log(allDivUtenti);
         
-        let form = document.querySelector("#formSuggerimenti");
-        let divSuggerimenti = document.querySelector("#divSuggerimenti"); 
-        divSuggerimenti.textContent = "";
-        divSuggerimenti.style.display = "block"; 
-
-        for (const utente of fileUtenti) {
-
-            if(fileUtentiSeguiti.includes(utente) || fileUtentiSeguiti.includes(utenteCorrente))
-                continue;
-
-            //CONTROLLARE QUELLI CHE NON HO ANCORA SEGUITO
-            //(NON FACCIO RIAPPARIRE QUELLI CHE SEGUO GIà)
-            let div = document.createElement("div");
-            let sottoDiv = document.createElement("div");
-            let bottone = document.createElement("button");
-
-            div.className = "popup";
-            bottone.textContent = "Segui";
-            bottone.name = "username";
-            bottone.value = utente;
-
-            sottoDiv.textContent = utente;
-            div.appendChild(sottoDiv);
-            div.appendChild(bottone);
-            divSuggerimenti.appendChild(div);
+        if(testo == "")
+        {
+            for (const divUtente of allDivUtenti) 
+            {
+                divUtente.style.display = "flex";
+            }
         }
-        console.log(divSuggerimenti);
-    });
-
-    // divBarraRicerca.addEventListener("focusout", function()
-    // {
-    //     let divSuggerimenti = document.querySelector("#divSuggerimenti"); 
-    //     divSuggerimenti.textContent =  "";
-    // });
+        for (const divUtente of allDivUtenti) 
+        {
+            let username = divUtente.getAttribute("username");
+            
+            if(!username.toLowerCase().includes(testo))
+            {
+                divUtente.style.display = "none";
+            }
+            else
+            {
+                divUtente.style.display = "flex";
+            }
+        }
+    }
 
 </script>
