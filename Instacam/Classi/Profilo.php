@@ -7,6 +7,7 @@ class Profilo
     private $mail;
     private $password;
     private $descrizione;
+    private $nome;
     private $pathFoto;
     private $seguiti = [];
     private $followers = [];
@@ -24,6 +25,8 @@ class Profilo
         $this->pathFoto = $foto;
         $this->seguiti = $this->getSeguiti();
     }
+
+    
     public static function getProfiloDaUsername($username) {
 
         $pathProfilo = "FileUtenti/$username/FileInfo.csv";

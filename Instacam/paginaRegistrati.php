@@ -23,7 +23,7 @@
             <label for="password">PASSWORD</label>
             <input type="password" id="password" name="password">
         </div>
-        <button>REGISTRATI</button>
+        <button>CONFIGURA PROFILO</button>
     </form>
 </body>
 </html>

@@ -11,6 +11,8 @@ class Post
     private $pathFileCommentiPost;
     private $pathFileLikePost;
     private $giaVisto;
+
+    
     public function __construct($nomeUtente, $estensioneFile, $dataPubblicazione, $descrizione = "")
     {
         $this->idProfilo = $nomeUtente;

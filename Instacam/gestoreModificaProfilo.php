@@ -1,38 +1,31 @@
 <?php
-if (!(isset($_SESSION)))
-    session_start();
 
-//piglio i dati 
-$nomeUtente = $_GET['username'];
-$nome = $_GET['nome'];
-$email = $_GET['email'];
-$descrizione = $_GET['descrizione'];
+    if (!(isset($_SESSION)))
+        session_start();
 
+    //piglio i dati dalla get
+    $nomeUtente = $_GET['moficaUsername'];
+    $email = $_GET['moficaEmail'];
+    $descrizione = $_GET['moficaDescrizione'];
 
-$percorsoFileInfo = "path/to/fileInfo.csv";
-$datiProfilo = array_map('str_getcsv', file($percorsoFileInfo));
-$intestazione = array_shift($datiProfilo);
+    //PATH
+    $percorsoFileInfo = "FileUtenti/$nomeUtente/fileInfo.csv";
 
-//vado a pescarmi il profilo a cui devo aggiornare i dati
-$indiceUtente = 0;
-foreach ($datiProfilo as $indice => $dati) {
-    if ($dati[0] == $nomeUtente) {
-        $indiceUtente = $indice;
-        break;
-    }
-}
+    //devo andare a copiare quello che c'è scritto dentro per poterlo modificare
+    //quindi prima copio le informazioni e le metto nel vettore in locazioni differenti
+    //poi vado a sovrascrivere ogni campo
 
-//vado a sovrascrivere i dati del profilo
-if ($indiceUtente != 0) {
-    if (!empty($nome)) {
-        $datiProfilo[$indiceUtente][1] = $nome;
-    }
-    if (!empty($email)) {
-        $datiProfilo[$indiceUtente][2] = $email;
-    }
-    if (!empty($descrizione)) {
-        $datiProfilo[$indiceUtente][3] = $descrizione;
-    }
+    //esempio:
+    //[0] = nomeUtente
+    //[1] = mail
+    //[2] = password
+    //[3] = descrizione 
+    //TODO: devo creare nuova pagina configurazione profilo con inserimento immagine profilo e descrizione
+
+    //vado a sovrascrivere nel file con il metodo toCsv
+
+    $vettoreAppoggio[]; //dove vado a storarmi le modifiche che poi devo scrivermi nel file
+    //vado a sovrascrivere i dati del profilo
 
     //questo mi serve per scriverlo su file
     $file = fopen($percorsoFileInfo, 'w');
@@ -42,20 +35,11 @@ if ($indiceUtente != 0) {
     }
     fclose($file);
 
-
     //questo mi serve per aggiornare la sessione
     $_SESSION['utenteCorrente']['nome'] = $nome;
     $_SESSION['utenteCorrente']['email'] = $email;
     $_SESSION['utenteCorrente']['descrizione'] = $descrizione;
 
-
-    //questo mi serve per aggiornare l'oggetto profilo
-    $_SESSION['profilo']->setNome($nome);
-    $_SESSION['profilo']->setEmail($email);
-    $_SESSION['profilo']->setDescrizione($descrizione);
-}
-
-header("Location: paginaProfilo.php?username=$nomeUtente");
-exit;
-
+    header("Location: paginaProfilo.php?username=$nomeUtente");
+    exit;
 ?>
