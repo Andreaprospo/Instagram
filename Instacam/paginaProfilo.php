@@ -26,6 +26,7 @@
 
         <div id="container">
             <h1>Profilo di <?php echo $profilo->getUsername(); ?></h1>
+            <img src="<?php echo $profilo->getPathFoto(); ?>" alt="Foto Profilo">
             <p>Email: <?php echo $profilo->getMail(); ?></p>
             <p>Descrizione: <?php echo $profilo->getDescrizione(); ?></p>
 
@@ -49,7 +50,7 @@
                 ?>
             </ul>
 
-            <img src="<?php echo $profilo->getPathFoto(); ?>" alt="Foto Profilo">
+            
 
             <h2>Post</h2>
             <div id="container2">
