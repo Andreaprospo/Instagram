@@ -21,14 +21,14 @@
         }
         public function toCSV()
         {
-            $path = "FileUtenti/$this->username/FilePubblicazione.csv";
+            $path = "./FileUtenti/$this->username/FilePubblicazione.csv";
             $dati = "$this->id;Storia;$this->username;$this->estensione;$this->data;$this->giaVisto\n";
             file_put_contents($path, $dati, FILE_APPEND);
         }
 
         public function fromCSV($id, $username)
         {
-            $pathStoria = "FileUtenti/$username/FilePubblicazioni.csv";
+            $pathStoria = "./FileUtenti/$username/FilePubblicazioni.csv";
             if(file_exists($pathStoria))
             {
                 $contenuto = file_get_contents($pathStoria);
@@ -90,7 +90,7 @@
 
         public static function getLastId($username)
         {
-            $pathPartenza = "FileUtenti/$username/FotoStoria/";
+            $pathPartenza = "./FileUtenti/$username/FotoStoria/";
             $uploadDir = opendir($pathPartenza);
             $lastId = -1;
     
@@ -117,7 +117,7 @@
 
         private function extractPathFoto($id, $username)
         {
-            return "FileUtenti/$username/FotoStoria/$id.$this->estensione";
+            return "./FileUtenti/$username/FotoStoria/$id.$this->estensione";
         }
    }
 ?>

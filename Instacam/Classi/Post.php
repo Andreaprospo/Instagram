@@ -3,22 +3,26 @@
 class Post
 {
     private $id;
-    private $idProfilo;
-    private $descrizione;
+    private $usernameProfilo;
+    private $estensione;
     private $pathFoto;
     private $luogo;
     private $data;
+    private $descrizione;
     private $pathFileCommentiPost;
     private $pathFileLikePost;
     private $giaVisto;
 
     
-    public function __construct($nomeUtente, $estensioneFile, $dataPubblicazione, $descrizione = "")
+    public function __construct($idPost, $usernameProfilo, $estensione, $dataPubblicazione, $descrizione = "")
     {
-        $this->idProfilo = $nomeUtente;
-        $this->pathFoto = $estensioneFile;
+        $this->id = $idPost;
+        $this->usernameProfilo = $usernameProfilo;
+        $this->estensione = $estensione;
         $this->data = $dataPubblicazione;
         $this->descrizione = $descrizione;
+        $this->pathFoto = "./FileUtenti/$usernameProfilo/FotoPost/$this->id.$this->estensione";
+        $this->giaVisto = false;
     }
 
     public function getId()
@@ -29,13 +33,13 @@ class Post
     {
         $this->id = $id;
     }
-    public function getIdProfilo()
+    public function getUsername()
     {
-        return $this->idProfilo;
+        return $this->usernameProfilo;
     }
-    public function setIdProfilo($idProfilo)
+    public function setUsername($usernameProfilo)
     {
-        $this->idProfilo = $idProfilo;
+        $this->usernameProfilo = $usernameProfilo;
     }
     public function getDescrizione()
     {
@@ -103,9 +107,9 @@ class Post
 
     public function toCSV()
     {
-        $path = "FileUtenti/$this->idProfilo/FilePost/$this->id.csv";
-        $dati = "$this->id;$this->idProfilo;$this->descrizione;$this->pathFoto;$this->luogo;$this->data;$this->pathFileCommentiPost;$this->pathFileLikePost;$this->giaVisto";
-        file_put_contents($path, $dati);
+        $dati = "$this->id;Post;$this->usernameProfilo;$this->estensione;$this->data;$this->descrizione;$this->luogo;$this->giaVisto\n";
+        $path = "./FileUtenti/$this->usernameProfilo/FilePubblicazione.csv";
+        file_put_contents($path, $dati, FILE_APPEND);
     }
     public function fromCSV($path)
     {
@@ -113,14 +117,12 @@ class Post
             $dati = file_get_contents($path);
             $arrayDati = explode(";", $dati);
             $this->id = $arrayDati[0];
-            $this->idProfilo = $arrayDati[1];
-            $this->descrizione = $arrayDati[2];
-            $this->pathFoto = $arrayDati[3];
-            $this->luogo = $arrayDati[4];
-            $this->data = $arrayDati[5];
-            $this->pathFileCommentiPost = $arrayDati[6];
-            $this->pathFileLikePost = $arrayDati[7];
-            $this->giaVisto = $arrayDati[8];
+            $this->usernameProfilo = $arrayDati[2];
+            $this->estensione = $arrayDati[3];
+            $this->data = $arrayDati[4];
+            $this->descrizione = $arrayDati[5];
+            $this->luogo = $arrayDati[6];
+            $this->giaVisto = $arrayDati[7];
         }
     }
     private function calcolaLike()
@@ -146,31 +148,28 @@ class Post
     }
 
     public static function getLastId($nomeUtente) {
-        $pathCartellaFoto = "FileUtenti/$nomeUtente/FotoPost";
-        
-        if (!is_dir($pathCartellaFoto)) {
-            return 0;
+        $pathCartellaFoto = "./FileUtenti/$nomeUtente/FotoPost";
+
+        $lastId = -1;
+        $uploadDir = opendir($pathCartellaFoto);
+    
+        while($nomeFileIntero = readdir($uploadDir))
+        {
+            $idFile = explode(".", $nomeFileIntero)[0];
+            if($idFile == "." || $idFile == "..")
+                continue;
+
+            if($lastId < $idFile)
+                $lastId = $idFile;
+            echo $idFile . "\n";
         }
-    
-        $file = scandir($pathCartellaFoto);
-        $idMassimo = 0;
-    
-        foreach ($file as $fileItem) {
-            $parts = explode('.', $fileItem);
-            if (count($parts) > 1) {
-                $id = (int)$parts[0];
-                if ($id > $idMassimo) {
-                    $idMassimo = $id;
-                }
-            }
-        }
-    
-        return $idMassimo;
+        closedir($uploadDir);
+        return $lastId;
     }
 
     public static function getPostsDaUser($nomeUtente) {
-        $percorsoCartellaFoto = "FileUtenti/$nomeUtente/FotoPost";
-        $percorsoDescrizioni = "FileUtenti/$nomeUtente/descrizioni.csv";
+        $percorsoCartellaFoto = "./FileUtenti/$nomeUtente/FotoPost";
+        $percorsoDescrizioni = "./FileUtenti/$nomeUtente/descrizioni.csv";
         $post = [];
         $descrizioni = [];
         
@@ -195,7 +194,7 @@ class Post
                         $descrizione = ""; 
     
                         //lettura della descrizione dal file
-                        $pathDescrizione = "FileUtenti/$nomeUtente/DescrizioniPost/{$idPost}.txt";
+                        $pathDescrizione = "./FileUtenti/$nomeUtente/DescrizioniPost/{$idPost}.txt";
                         if (file_exists($pathDescrizione)) {
                             $descrizione = file_get_contents($pathDescrizione);
                         }
@@ -207,6 +206,11 @@ class Post
         }
     
         return $post;
+    }
+
+    public static function parse($campi)
+    {
+        return new Post($campi[0], $campi[2], $campi[3], $campi[4], $campi[5]);
     }
 }
 ?>

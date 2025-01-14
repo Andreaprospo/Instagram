@@ -16,7 +16,7 @@
             }
         ?>
         <div id="container">
-            <form action="gestoreAddPost.php" method="get" enctype="multipart/form-data" id="form">
+            <form action="gestoreAddPost.php" method="post" enctype="multipart/form-data" id="form">
                 <div>
                     <label for="file">SELEZIONA UNA FOTO:</label>
                     <input type="file" name="file" id="file">

@@ -9,7 +9,7 @@
     $descrizione = $_GET['moficaDescrizione'];
 
     //PATH
-    $percorsoFileInfo = "FileUtenti/$nomeUtente/fileInfo.csv";
+    $percorsoFileInfo = "./FileUtenti/$nomeUtente/fileInfo.csv";
 
     //devo andare a copiare quello che c'è scritto dentro per poterlo modificare
     //quindi prima copio le informazioni e le metto nel vettore in locazioni differenti

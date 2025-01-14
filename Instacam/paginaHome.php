@@ -72,7 +72,7 @@
                         $storiesSeguito = $seguito->getStories();
                         if($storiesSeguito != null)
                         {
-                            echo "<div id = " . $seguito->getUsername() .  " class = divStoria >";
+                            echo "<div id = " . $seguito->getUsername() .  " class = divStoria>";
                                 echo "<img src=" . $seguito->getPathFoto() . " id= " . $seguito->getUsername() ." class=fotoProfilo>";
                                 
                                 foreach ($storiesSeguito as $storia) {
@@ -110,10 +110,48 @@
                     </form>
                 </div>
                 <div id = "divPost">
+                    <?php
+                        require_once "Classi/Profilo.php";
+                        require_once "Classi/Post.php";
 
+                        $allSeguiti = $utenteCorrente->getSeguiti();
+                        foreach ($allSeguiti as $seguito)
+                        {
+                            echo "<div id = " . $seguito->getUsername() . ">";
+                            if($seguito == null)
+                                continue;
+                            $postSeguito = $seguito->getPost();
+                            if($postSeguito != null)
+                            {  
+                                foreach ($postSeguito as $post) 
+                                {
+                                    echo "<img src=" . $post->getPathFoto() . " id = id" . $post->getId() . " valoreid=" . $post->getId() ." username=" . $seguito->getUsername() . " class = coperta>";
+                                }
+                            }   
+                            echo "</div>";
+                        }
+                    ?>
                 </div>
                 <div id = "divRicercaUtentiSeguiti">
+                    <?php
+                        if(!isset($_SESSION))              
+                            session_start();
 
+                        $allSeguiti = $utenteCorrente->getSeguiti();
+                        foreach($allSeguiti as $seguito)
+                        {
+                            if($seguito == null)
+                                continue;
+
+                            echo "<div class = divSeguiti>
+                                <div>" . $seguito->getUsername() . "</div>
+                                <div class = divBottoni>
+                                <button onclick=getPost() value = " . $seguito->getUsername() . ">Post</button>
+                                <button onclick=getStories()>Storie</button>
+                                </div>
+                            </div>";
+                        }  
+                    ?>
                 </div>
             </div>
         </div>
@@ -135,10 +173,15 @@
 
         storia.addEventListener("click", function(e)
         {
+            let storieScoperte = document.querySelectorAll(".scoperta");
+            console.log(storieScoperte);
+            for (const storiaScoperta of storieScoperte) {
+                storiaScoperta.className = "coperta";  
+            }
+
             let idTarget = e.target.id;
             let allStories = document.querySelectorAll("#" + e.target.id);
-            console.log(allStories);
-            let storiaSelezionata = document.querySelector("#divStoriaNascosta img");
+            let storiaSelezionata = document.querySelector("#" + e.target.id + " #divStoriaNascosta img");
 
             storiaSelezionata.className = "scoperta";
             console.log(storiaSelezionata);
@@ -191,9 +234,6 @@
         console.log(e.key);
     }) 
 
-        
-
-
 </script>
 
 <script>
@@ -226,5 +266,29 @@
             }
         }
     }
+
+</script>
+
+<script>
+
+    function getStories()
+    {
+        alert("storie");
+    }
+
+    function getPost()
+    {
+        let buttonClick = this.event.target;
+        let usernamePost = buttonClick.value;
+
+        let allPost =document.querySelector("#divPost #" + usernamePost + " img");
+        if(allPost.className == "scoperta")
+            allPost.className = "coperta";
+        else
+            allPost.className = "scoperta";
+
+        console.log(allPost); 
+    }
+
 
 </script>

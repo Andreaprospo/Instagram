@@ -1,5 +1,12 @@
 <?php
 require_once "Classi/Post.php";
+require_once "Classi/Profilo.php";
+
+if(!isset($_SESSION))
+    session_start();
+
+$utenteCorrente = $_SESSION["utenteCorrente"];
+$username = $utenteCorrente->getUsername();
 
 if (isset($_FILES["file"]) && !empty($_FILES["file"])) 
 {
@@ -7,15 +14,14 @@ if (isset($_FILES["file"]) && !empty($_FILES["file"]))
     $fileName = $_FILES["file"]["name"];
 
     if ($fileTmpPath == null) {
-        header("location: paginaAddPost.php?messaggio=nessun file caricato!");
+        header("location:paginaAddPost.php?messaggio=nessun file caricato!");
         exit;
     }
 
     $fileParts = explode(".", $fileName);
     $estensioneFile = end($fileParts);
 
-    $username = "Marco";
-    $pathUtente = "FileUtenti/$username";
+    $pathUtente = "./FileUtenti/$username";
     $pathCartellaFoto = "$pathUtente/FotoPost";
 
     if (!is_dir($pathCartellaFoto)) {
@@ -45,7 +51,7 @@ if (isset($_FILES["file"]) && !empty($_FILES["file"]))
         $descrizione = "";
     }
 
-    $post = new Post($username, $estensioneFile, $infoDataPubblicazione, $descrizione);
+    $post = new Post($idPost, $username, $estensioneFile, $infoDataPubblicazione, $descrizione);
     $post->toCSV();
     header("location: paginaHome.php?popup=post caricato con successo");
 } 

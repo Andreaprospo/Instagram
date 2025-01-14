@@ -24,7 +24,7 @@
         //nome utente che prendo dalla sessione 
         //$username = $_SESSION["utente"];
         $username = $utenteCorrente->getUsername();
-        $pathUtente = "FileUtenti/$username";
+        $pathUtente = "./FileUtenti/$username";
         $pathCartellaFoto = "$pathUtente/FotoStoria";
 
         //crea la cartella se non esiste

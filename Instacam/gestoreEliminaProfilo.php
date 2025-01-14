@@ -2,7 +2,7 @@
 require_once "Classi/Profilo.php";
 
 $username = $_POST['username'];
-$pathUtente = "FileUtenti/$username";
+$pathUtente = "./FileUtenti/$username";
 
 //elimina la cartella dell'utente e tutto quello che c'è dentro così praticamente elimina il profilo
 function deleteDirectory($dir) {

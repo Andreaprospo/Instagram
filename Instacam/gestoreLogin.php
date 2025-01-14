@@ -9,14 +9,10 @@
 
     $username = $_GET["username"];
 
-    if(is_dir("FileUtenti/$username"))
+    if(is_dir("./FileUtenti/$username"))
     {
-        echo $username;
         $profilo = Profilo::fromCSV($username);
-        if($profilo == null)
-            echo "Null";
-        else
-            echo "Ok";
+        
         $password = $profilo->getPassword();
         if($password == $_GET["password"])
         {

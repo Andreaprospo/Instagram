@@ -20,16 +20,13 @@ class Profilo
         $this->password = $password;
         $this->descrizione = $descrizione;
         $foto = "./FileUtenti/$this->username/fotoProfilo.jpg";
-        if(!file_exists($foto))
-            $foto = "";
         $this->pathFoto = $foto;
-        $this->seguiti = $this->getSeguiti();
     }
 
     
     public static function getProfiloDaUsername($username) {
 
-        $pathProfilo = "FileUtenti/$username/FileInfo.csv";
+        $pathProfilo = "./FileUtenti/$username/FileInfo.csv";
 
         if (file_exists($pathProfilo)) {
             $dati = file_get_contents($pathProfilo);
@@ -97,13 +94,6 @@ class Profilo
             file_put_contents("./FileUtenti/$username/FileFollowers.csv", $this->username . "\n",FILE_APPEND);
         }
     }
-
-    // public function aggiungiFollower($username)
-    // {
-    //     if (!in_array($username, $this->followers)) {
-    //         $this->followers[] = $username;
-    //     }
-    // }
     public function aggiungiPost($post)
     {
         $this->post[] = $post;
@@ -112,7 +102,7 @@ class Profilo
     public function getSeguiti() {
 
         $info = file_get_contents("./FileUtenti/$this->username/FileSeguiti.csv");
-        $allUsernameUser = explode( "\n", $info);
+        $allUsernameUser = explode("\n", $info);
         $allUser = [];
         foreach ($allUsernameUser as $username) {
             if($username == null)
@@ -139,11 +129,21 @@ class Profilo
     }
 
     public function getPost() {
-        $vettorePost = [];
-        for ($i = 0; $i < count($this->post); $i++) {
-            $vettorePost[] = $this->post[$i];
+
+        $allPost = [];
+        $info = file_get_contents("./FileUtenti/$this->username/FilePubblicazione.csv");
+        $allPubblicazione = explode("\n", $info);
+        foreach($allPubblicazione as $pubblicazione)
+        {
+            if($pubblicazione == null)
+                continue;
+            $campi = explode(";", $pubblicazione);
+            if($campi[1] == "Post")
+                $allPost[] = Post::parse($campi);
         }
-        return $vettorePost;
+        $this->post = $allPost;
+        return $this->post;
+   
     }
     public function getStories() {
 
@@ -160,7 +160,6 @@ class Profilo
         }
         $this->stories = $allStories;
         return $this->stories;
-
     }
     public function toCSV()
     {
@@ -176,9 +175,6 @@ class Profilo
             $dati = file_get_contents("$path/FileInfo.csv");
             $arrayDati = explode(";", $dati);
     
-            $foto = "fotoProfilo.jpg";
-            if(!file_exists($foto))
-                $foto = "";
             return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3]);
         }      
         return null;
@@ -196,5 +192,8 @@ class Profilo
         file_put_contents($pathUtente . "/FileLikePost.csv", "", FILE_APPEND);
         file_put_contents($pathUtente . "/FilePubblicazione.csv", "", FILE_APPEND);
         file_put_contents($pathUtente . "/FileSeguiti.csv", "", FILE_APPEND);
+        file_put_contents($pathUtente . "/FileCommenti.csv", "", FILE_APPEND);
     }
+
+
 }

@@ -26,7 +26,7 @@ if (isset($_GET["descrizione"])) {
     $descrizione = "";
 }
 
-$pathUtente = "FileUtenti/$username";
+$pathUtente = "./FileUtenti/$username";
 if (is_dir($pathUtente)) {
     header("location: paginaRegistrazione.php?messaggio=utente già esistente!");
     exit;
