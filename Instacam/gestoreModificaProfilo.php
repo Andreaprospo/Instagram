@@ -41,6 +41,8 @@ $_SESSION["nome"] = $nome;
 $_SESSION["mail"]=$mail;
 $_SESSION["descrizione"]=$descrizione;
 
+$_SESSION["utenteCorrente"] = $profilo;
+
 // Reindirizza alla pagina del profilo
 header("Location: paginaProfilo.php?username=$username");
 exit;
