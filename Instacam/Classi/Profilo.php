@@ -210,7 +210,7 @@ class Profilo
             $dati = file_get_contents("$path/FileInfo.csv");
             $arrayDati = explode(";", $dati);
             require_once "Classi/Profilo.php";
-            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4], $arrayDati[5] );
+            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4], $arrayDati[5]);
         }      
         return null;
     }

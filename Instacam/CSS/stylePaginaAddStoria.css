@@ -24,7 +24,7 @@ body {
 }
 
 /* Stile per i div che contengono gli input */
-form div {
+#container form div {
     margin-bottom: 20px;
     width: 100%;
 }

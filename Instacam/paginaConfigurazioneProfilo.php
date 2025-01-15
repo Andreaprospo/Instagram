@@ -24,7 +24,7 @@
         </div>
 
         <div>
-            <label for="descrizione">DESCRIZIONE</label>
+            <label for="descrizione">DESCRIZIONE PROFILO</label>
             <input type="text" id="descrizione" name="descrizione">
         </div>
         

@@ -1,11 +1,11 @@
 <?php
+require_once "Classi/Profilo.php";
 
 if (!isset($_SESSION))
     session_start();
 
-require_once "Classi/Profilo.php";
 
-$username = $_SESSION["username"];
+$username = $_SESSION["utenteCorrente"]->getUsername();
 $profilo = Profilo::getProfiloDaUsername($username);
 
 $nome = $_POST['nome'];
