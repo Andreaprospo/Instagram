@@ -119,5 +119,26 @@
         {
             return "./FileUtenti/$username/FotoStoria/$id.$this->estensione";
         }
-   }
+
+        public static function checkDate($date)
+        {
+            //quella che avevo setta
+            $dateSet = strtotime($date);
+            //quella di ora
+            $currentDate = time();
+
+            //calcola il timespan
+            $timeSpan = $dateSet - $currentDate;
+
+            //guarda i giorni passati
+            $dayPassed = $timeSpan / (60 * 60 * 24);
+
+            //se è passato più di un giorno allora return true 
+            //altrimenti return false
+            if ($dayPassed >= 1)
+                return true;
+            return false;
+        }
+    }
+   
 ?>

@@ -12,8 +12,6 @@
         header("location: index.php");
         exit;
     }
-
-    echo $utenteCorrente->getUsername();
 ?>
 <?php
     function getAllUtenti()
@@ -58,11 +56,11 @@
     <link rel="icon" href="iconaSito.png" type="image/png">
     <link rel="stylesheet" href="CSS/styleFooter.css">
     <link rel="stylesheet" href="CSS/stylePaginaHome.css">
-    <title>Document</title>
+    <title>HomePage</title>
 </head>
     <body>
         <div id = "container">
-            <div id = "divStorie">
+            <div id = "divStorieIcona">
                 <?php
                     require_once "Classi/Storia.php";
                     $allSeguiti = $utenteCorrente->getSeguiti();
@@ -72,15 +70,13 @@
                         $storiesSeguito = $seguito->getStories();
                         if($storiesSeguito != null)
                         {
+                            echo "<div class=iconaStoria>";
+                            echo "<div class=tagName>" . $seguito->getUsername() . "</div>";
                             echo "<div id = " . $seguito->getUsername() .  " class = divStoria>";
                                 echo "<img src=" . $seguito->getPathFoto() . " id= " . $seguito->getUsername() ." class=fotoProfilo>";
-                                
-                                foreach ($storiesSeguito as $storia) {
-                                    echo "<div id = divStoriaNascosta>";
-                                        echo "<img src=" . $storia->getPathFoto() . " id = id" . $storia->getIdStoria() . " valoreid=" . $storia->getIdStoria() ." tipo=storia class=coperta username=" . $seguito->getUsername() . ">";
-                                    echo "</div>";
-                                }
                             echo "</div>";
+                            echo "</div>";
+
                         }
                     }
                 ?>
@@ -98,7 +94,7 @@
     
                                 foreach ($allUtenti as $utente)
                                 {
-                                    if(checkUsername($allSeguiti, $utente) || $utente == $utenteCorrente)
+                                      if(checkUsername($allSeguiti, $utente) || $utente == $utenteCorrente)
                                         continue;
                                     echo "<div class = popup username = $utente>";
                                         echo "<div>$utente</div>";
@@ -109,28 +105,50 @@
                         </div>
                     </form>
                 </div>
-                <div id = "divPost">
-                    <?php
-                        require_once "Classi/Profilo.php";
-                        require_once "Classi/Post.php";
-
-                        $allSeguiti = $utenteCorrente->getSeguiti();
-                        foreach ($allSeguiti as $seguito)
-                        {
-                            echo "<div id = " . $seguito->getUsername() . ">";
-                            if($seguito == null)
-                                continue;
-                            $postSeguito = $seguito->getPost();
-                            if($postSeguito != null)
-                            {  
-                                foreach ($postSeguito as $post) 
+                <div id="divPubblicazioni">
+                    <div id = "divPost">
+                        <?php
+                            require_once "Classi/Profilo.php";
+                            require_once "Classi/Post.php";
+    
+                            $allSeguiti = $utenteCorrente->getSeguiti();
+                            foreach ($allSeguiti as $seguito)
+                            {
+                                if($seguito == null)
+                                    continue;
+                                $postSeguito = $seguito->getPost();
+                                if($postSeguito != null)
+                                {  
+                                    echo "<div id = " . $seguito->getUsername() . " class = divPostUtente>";
+                                    foreach ($postSeguito as $post) 
+                                    {
+                                        echo "<img src=" . $post->getPathFoto() . " id = id" . $post->getId() . " valoreid=" . $post->getId() ." username=" . $seguito->getUsername() . " tipo=post  class = coperta>";
+                                    }
+                                    echo "</div>";
+                                }   
+                            }
+                        ?>
+                    </div>
+                    <div id="divStoria">
+                        <?php
+                            require_once "Classi/Storia.php";
+                            $allSeguiti = $utenteCorrente->getSeguiti();
+                            foreach ($allSeguiti as $seguito) {
+                                if($seguito == null)
+                                    continue;
+                                $storiesSeguito = $seguito->getStories();
+                                if($storiesSeguito != null)
                                 {
-                                    echo "<img src=" . $post->getPathFoto() . " id = id" . $post->getId() . " valoreid=" . $post->getId() ." username=" . $seguito->getUsername() . " tipo=post  class = coperta>";
+                                    echo "<div id = " . $seguito->getUsername() . " class = divPostUtente>";
+                                    foreach ($storiesSeguito as $storia)
+                                    {
+                                            echo "<img src=" . $storia->getPathFoto() . " id = id" . $storia->getIdStoria() . " valoreid=" . $storia->getIdStoria() ." tipo=storia class=coperta username=" . $seguito->getUsername() . ">";
+                                    }
+                                    echo "</div>";  
                                 }
-                            }   
-                            echo "</div>";
-                        }
-                    ?>
+                            }
+                        ?>
+                    </div>  
                 </div>
                 <div id = "divRicercaUtentiSeguiti">
                     <?php
@@ -147,7 +165,7 @@
                                 <div>" . $seguito->getUsername() . "</div>
                                 <div class = divBottoni>
                                 <button onclick=getPost() value = " . $seguito->getUsername() . ">Post</button>
-                                <button onclick=getStories()>Storie</button>
+                                <button tipo = storia value = " . $seguito->getUsername() . ">Storie</button>
                                 </div>
                             </div>";
                         }  
@@ -163,29 +181,60 @@
 
 <script>
 
-    let divStorie = document.querySelectorAll(".divStoria");
-    console.log(divStorie);
+    let divStorieIcona = document.querySelectorAll(".divStoria");
+    console.log(divStorieIcona);
 
-
-
-
-    for (const storia of divStorie) {
+    for (const storia of divStorieIcona) {
 
         storia.addEventListener("click", function(e)
         {
+            let divPost = document.querySelector("#divPost");
+            divPost.style.display = "none";
+            let divStoria = document.querySelector("#divStoria");
+            divStoria.style.display = "block";
+
             let storieScoperte = document.querySelectorAll(".scoperta");
-            console.log(storieScoperte);
             for (const storiaScoperta of storieScoperte) {
                 storiaScoperta.className = "coperta";  
             }
 
-            let idTarget = e.target.id;
-            let allStories = document.querySelectorAll("#" + e.target.id);
-            let storiaSelezionata = document.querySelector("#" + e.target.id + " #divStoriaNascosta img");
+            let username = e.target.id;
+            console.log(username);
+            let storiaSelezionata = document.querySelector("#divStoria" + " #" + username + " img");
 
             storiaSelezionata.className = "scoperta";
             console.log(storiaSelezionata);
+        })
+    }
 
+    let buttonStorie = document.querySelectorAll("button[tipo = storia]");
+    for (const button of buttonStorie) 
+    {
+        button.addEventListener("click", function(e)
+        {
+            let divPost = document.querySelector("#divPost");
+            divPost.style.display = "none";
+            let divStoria = document.querySelector("#divStoria");
+            if(divStoria.style.display == "block")
+            {
+                divStoria.style.display = "none";
+                return;
+            }
+            else
+                divStoria.style.display = "block";
+
+
+            let storieScoperte = document.querySelectorAll(".scoperta");
+            for (const storiaScoperta of storieScoperte) {
+                storiaScoperta.className = "coperta";  
+            }
+
+            let username = e.target.value;
+            console.log(username);
+            let storiaSelezionata = document.querySelector("#divStoria" + " #" + username + " img");
+
+            storiaSelezionata.className = "scoperta";
+            console.log(storiaSelezionata);
         })
     }
 
@@ -205,7 +254,7 @@
             let pubblicazionaDaScoprire;
             let nextIdPubblicazione = Number(idPubblicazioneSelezionata)+1;
             if(tipo == "storia")
-                pubblicazionaDaScoprire = document.querySelector("#" + usernamePubblicazioneScoperta + " #divStoriaNascosta #id" + nextIdPubblicazione);   
+                pubblicazionaDaScoprire = document.querySelector("#divStoria #" + usernamePubblicazioneScoperta + " #id" + nextIdPubblicazione);   
             else
                 pubblicazionaDaScoprire = document.querySelector("#divPost #" + usernamePubblicazioneScoperta + " #id" + nextIdPubblicazione);
 
@@ -228,7 +277,7 @@
             let pubblicazionaDaScoprire;
             let nextIdPubblicazione = Number(idPubblicazioneSelezionata)-1;
             if(tipo == "storia")
-                pubblicazionaDaScoprire = document.querySelector("#" + usernamePubblicazioneScoperta + " #divStoriaNascosta #id" + nextIdPubblicazione);   
+                pubblicazionaDaScoprire = document.querySelector("#divStoria #" + usernamePubblicazioneScoperta + " #id" + nextIdPubblicazione);   
             else
                 pubblicazionaDaScoprire = document.querySelector("#divPost #" + usernamePubblicazioneScoperta + " #id" + nextIdPubblicazione);
 
@@ -286,13 +335,14 @@
 
 <script>
 
-    function getStories()
-    {
-        alert("storie");
-    }
-
     function getPost()
     {
+
+        let divStoria = document.querySelector("#divStoria");
+        divStoria.style.display = "none";
+        let divPost = document.querySelector("#divPost");
+        divPost.style.display = "block";
+
         let buttonClick = this.event.target;
         let usernamePost = buttonClick.value;
 

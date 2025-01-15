@@ -1,7 +1,14 @@
+html
+{
+    height: 100%;
+    width:  100%;
+}
+
 body
 {
     background: linear-gradient(135deg, #5a0000, #c40000); /* Gradiente rosso scuro intenso */
-
+    height: 99%;
+    width: 99%;
 }
 
 /* Stile base per il suggerimento */
@@ -28,7 +35,7 @@ body
 
 /* Input di esempio */
 #barraRicerca {
-    width: 200px;
+    width: 180px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -36,37 +43,31 @@ body
     margin-bottom: 5px;
 }
 
-.divStoria
+.divStoriaIcona
 {
-    width: 70px;
-    height: 65%;
-    border: #adb300 2px solid;
-    margin-left: 10px;
+    width: 80px;
+    height: 100%;
+    border-radius: 100px;
+    margin-top: 2px;
 }
 
 .fotoProfilo
 {
-    width: 70px;
+    width: 80px;
     height: 100%;
     border-radius: 100px;
 }
 
 .coperta
 {
-    position:absolute;
-    top: 0px;
-    left: 0px;
     display: none;
 }
 
 .scoperta
 {
     display: block;
-    position:absolute;
-    left: 374px;
-    top: 186px;
-    height: 63%;
-    width: 56%;
+    height: 100%;
+    width: 100%;
 }
 
 .popup {
@@ -92,8 +93,8 @@ body
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: auto;
+    margin-bottom: 5px;
     width: 90%;
-    margin-top: 10px;
 }
 
 .divSeguiti div {
@@ -130,23 +131,24 @@ button:hover {
     height: 90%;
 }
 
-#divStorie 
+#divStorieIcona 
 {
     height: 15%;
     width: 100%;
-    border: #b30054 2px solid;
+    /* border: #b30054 2px solid; */
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    margin-top: 5px;
 }
 
-#divPost
+#divPubblicazioni
 {
     width: 60%;
     height: 100%;
     margin-top: 80px;
     margin-left: 10px;
-    border: #dc79a7 2px solid;
+    background-color: #f0f0f044;
 }
 
 #divBarraRicerca
@@ -180,4 +182,47 @@ button:hover {
 div
 {
     align-items: center;
+}
+
+.tagName
+{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.iconaStoria
+{
+    margin-left: 10px;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#divPost
+{
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+
+#divStoria
+{
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+
+.divPostUtente
+{
+    height: 100%;
+    width: 100%;
+}
+
+.divStoria
+{
+    margin-top: 5px;
 }
