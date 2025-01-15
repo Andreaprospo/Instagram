@@ -35,7 +35,7 @@
                 <?php
                 $seguiti = $profilo->getSeguiti();
                 foreach ($seguiti as $seguito) {
-                    echo "<li>" . htmlspecialchars($seguito) . "</li>";
+                    echo "<li>" . $seguito . "</li>";
                 }
                 ?>
             </ul>
@@ -45,7 +45,7 @@
                 <?php
                 $followers = $profilo->getFollowers();
                 foreach ($followers as $follower) {
-                    echo "<li>" . htmlspecialchars($follower) . "</li>";
+                    echo "<li>" . $follower. "</li>";
                 }
                 ?>
             </ul>

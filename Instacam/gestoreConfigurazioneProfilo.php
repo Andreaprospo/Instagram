@@ -1,43 +1,38 @@
 <?php
 
-//solito
-if (!isset($_SESSION)) {
+if (!(isset($_SESSION)))
     session_start();
-}
 
-if (isset($_GET["pathFoto"])) {
-    $pathFoto = $_GET["pathFoto"];
-} else {
-    //nel caso in cui non mette foto_proflo allora lascio vuoto
-    $pathFoto = "";
-}
+require_once "Classi/Profilo.php";
 
-if (isset($_GET["nome"])) {
-    $nome = $_GET["nome"];
-} else {
-    //nel caso in cui non mette nome allora lascio vuoto
-    $nome = "";
-}
+$username = $_SESSION["username"];
+$mail = $_SESSION["mail"];
+$password = $_SESSION["password"];
 
-if (isset($_GET["descrizione"])) {
-    $descrizione = $_GET["descrizione"];
-} else {
-    //nel caso in cui non mette descrizione allora lascio vuoto
-    $descrizione = "";
-}
+$descrizione = $_POST["descrizione"];
+$nome = $_POST["nome"];
+$fotoProfilo = $_FILES["fotoProfilo"];
 
-$pathUtente = "./FileUtenti/$username";
-if (is_dir($pathUtente)) {
-    header("location: paginaRegistrazione.php?messaggio=utente già esistente!");
+if (!isset($username, $mail, $password, $descrizione, $nome, $fotoProfilo) || empty($username) || empty($mail) || empty($password) || empty($descrizione) || empty($nome) || empty($fotoProfilo['name'])) {
+    header("location: paginaConfigurazioneProfilo.php?messaggio=inserisci tutti i dati!");
     exit;
-} else {
-    $profilo = new Profilo($username, $mail, $password, "");
+}
+
+$profilo = new Profilo($username, $mail, $password, $descrizione, "", $nome);
+
+//salva la foto del profilo
+$pathFoto = $fotoProfilo['tmp_name'];
+if ($profilo->salvaFotoProfilo($pathFoto)) {
+    //salva il profilo
     $profilo->creaGerarchia();
     $profilo->toCSV();
 
-    header("location: paginaLogin.php?messaggio=registrazione avvenuta con successo!");
-    exit;
+    $_SESSION["descrizione"] = $descrizione;
+    $_SESSION["nome"] = $nome;
+    $_SESSION["fotoProfilo"] = $profilo->getPathFoto();
+    
+    header("location: paginaProfilo.php?messaggio=successo");
+} else {
+    header("location: paginaConfigurazioneProfilo.php?messaggio=errore nel caricamento della foto");
 }
-
-
 ?>

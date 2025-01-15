@@ -14,13 +14,33 @@ class Profilo
     private $post = [];
     private $stories = [];
     
-    public function __construct($username, $mail, $password, $descrizione) {
+    public function __construct($username, $mail, $password, $descrizione, $pathFoto, $nome) {
         $this->username = $username;
         $this->mail = $mail;
         $this->password = $password;
         $this->descrizione = $descrizione;
-        $foto = "./FileUtenti/$this->username/fotoProfilo.jpg";
-        $this->pathFoto = $foto;
+        $this->pathFoto = $pathFoto;
+        $this->nome = $nome;
+    }
+
+    public function salvaFotoProfilo($pathFoto)
+    {
+        $directory = "FileUtenti/$this->username";
+        $estensione = pathinfo($pathFoto, PATHINFO_EXTENSION);
+        $targetFile = $directory . "/fotoProfilo." . $estensione;
+
+        //controlla se la directory esiste, altrimenti la crea
+        if (!file_exists($directory)) {
+            mkdir($directory, 0777, true);
+        }
+
+        //sposta il file caricato nella directory dell'utente
+        if (move_uploaded_file($pathFoto, $targetFile)) {
+            $this->pathFoto = $targetFile;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     
@@ -36,6 +56,8 @@ class Profilo
                 $dati[1],
                 $dati[2],
                 $dati[3],
+                $dati[4],
+                $dati[5],
             );
         } else {
             return null;
@@ -86,6 +108,16 @@ class Profilo
         $this->pathFoto = $pathFoto;
     }
 
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
     public function aggiungiSeguito($username)
     {
         if (!in_array($username, $this->seguiti)) {
@@ -110,7 +142,7 @@ class Profilo
             $allUser[] = Profilo::fromCSV($username);
         }
         $this->seguiti = $allUser;
-        return $this->seguiti ;
+        return $this->seguiti;
 
     }
 
@@ -167,7 +199,7 @@ class Profilo
     public function toCSV()
     {
         $path = "./FileUtenti/$this->username/FileInfo.csv";
-        $dati = "$this->username;$this->mail;$this->password;$this->descrizione";
+        $dati = "$this->username;$this->mail;$this->password;$this->descrizione;$this->pathFoto;$this->nome;\n";
         file_put_contents($path, $dati);
     }
     public static function fromCSV($username)
@@ -177,8 +209,8 @@ class Profilo
         {
             $dati = file_get_contents("$path/FileInfo.csv");
             $arrayDati = explode(";", $dati);
-    
-            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3]);
+            require_once "Classi/Profilo.php";
+            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4], $arrayDati[5] );
         }      
         return null;
     }

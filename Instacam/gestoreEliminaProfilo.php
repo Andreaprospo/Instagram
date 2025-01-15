@@ -24,7 +24,7 @@ function deleteDirectory($dir) {
 }
 
 if (deleteDirectory($pathUtente)) {
-    header("location: paginaLogin.php?messaggio=profilo eliminato con successo");
+    header("location: Index.php?messaggio=profilo eliminato con successo");
 } else {
     header("location: paginaProfilo.php?messaggio=errore nell'eliminazione del profilo");
 }
