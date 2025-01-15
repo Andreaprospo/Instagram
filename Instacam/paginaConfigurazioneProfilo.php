@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +11,13 @@
 </head>
 <body>
     
-    <form action="gestoreConfigurazioneProfilo.php" method="get">
+    <form action="gestoreConfigurazioneProfilo.php" method="post" enctype="multipart/form-data">
 
-        TODO: DEVI METTERE COSA PER CARICARE LA FOTO PROFILO QUA 
+        <div>
+            <label for="fotoProfilo">FOTO PROFILO</label>
+            <input type="file" id="fotoProfilo" name="fotoProfilo" accept="image/*">
+        </div>
+
         <div>
             <label for="nome">NOME</label>
             <input type="text" id="nome" name="nome">
