@@ -77,7 +77,7 @@
                                 
                                 foreach ($storiesSeguito as $storia) {
                                     echo "<div id = divStoriaNascosta>";
-                                        echo "<img src=" . $storia->getPathFoto() . " id = id" . $storia->getIdStoria() . " valoreid=" . $storia->getIdStoria() ." class=coperta username=" . $seguito->getUsername() . ">";
+                                        echo "<img src=" . $storia->getPathFoto() . " id = id" . $storia->getIdStoria() . " valoreid=" . $storia->getIdStoria() ." tipo=storia class=coperta username=" . $seguito->getUsername() . ">";
                                     echo "</div>";
                                 }
                             echo "</div>";
@@ -125,7 +125,7 @@
                             {  
                                 foreach ($postSeguito as $post) 
                                 {
-                                    echo "<img src=" . $post->getPathFoto() . " id = id" . $post->getId() . " valoreid=" . $post->getId() ." username=" . $seguito->getUsername() . " class = coperta>";
+                                    echo "<img src=" . $post->getPathFoto() . " id = id" . $post->getId() . " valoreid=" . $post->getId() ." username=" . $seguito->getUsername() . " tipo=post  class = coperta>";
                                 }
                             }   
                             echo "</div>";
@@ -194,33 +194,48 @@
     {            
         if(e.key == "ArrowRight")
         {
-            let storiaScoperta = document.querySelector(".scoperta");
-            if(storiaScoperta == null)
+            let pubblicazioneScoperta = document.querySelector(".scoperta");
+            console.log(pubblicazioneScoperta);
+            if(pubblicazioneScoperta == null)
                 return;
-            let idStoriaSelezionata = storiaScoperta.getAttribute("valoreid");
-            let usernameStoriaScoperta = storiaScoperta.getAttribute("username");
-            let nextIdStoria = Number(idStoriaSelezionata)+1;
-            let storiaSelezionata = document.querySelector("#" + usernameStoriaScoperta + " #divStoriaNascosta #id" + nextIdStoria);   
-            if(storiaSelezionata != null)
-            {
-                storiaSelezionata.className = "scoperta";
-            }
+            let idPubblicazioneSelezionata = pubblicazioneScoperta.getAttribute("valoreid");
+            let usernamePubblicazioneScoperta = pubblicazioneScoperta.getAttribute("username");
+            let tipo = pubblicazioneScoperta.getAttribute("tipo");
+
+            let pubblicazionaDaScoprire;
+            let nextIdPubblicazione = Number(idPubblicazioneSelezionata)+1;
+            if(tipo == "storia")
+                pubblicazionaDaScoprire = document.querySelector("#" + usernamePubblicazioneScoperta + " #divStoriaNascosta #id" + nextIdPubblicazione);   
+            else
+                pubblicazionaDaScoprire = document.querySelector("#divPost #" + usernamePubblicazioneScoperta + " #id" + nextIdPubblicazione);
+
             document.querySelector(".scoperta").className = "coperta";
+            if(pubblicazionaDaScoprire != null)
+            {
+                pubblicazionaDaScoprire.className = "scoperta";
+            }
         }
         else if(e.key == "ArrowLeft")
         {
-            let storiaScoperta = document.querySelector(".scoperta");
-            if(storiaScoperta == null)
+            let pubblicazioneScoperta = document.querySelector(".scoperta");
+            console.log(pubblicazioneScoperta);
+            if(pubblicazioneScoperta == null)
                 return;
-            let idStoriaSelezionata = storiaScoperta.getAttribute("valoreid");  
-            let usernameStoriaScoperta = storiaScoperta.getAttribute("username");
-            let previousIdStoria = Number(idStoriaSelezionata)-1;
-            let storiaSelezionata = document.querySelector("#" + usernameStoriaScoperta + " #divStoriaNascosta #id" + previousIdStoria);   
+            let idPubblicazioneSelezionata = pubblicazioneScoperta.getAttribute("valoreid");
+            let usernamePubblicazioneScoperta = pubblicazioneScoperta.getAttribute("username");
+            let tipo = pubblicazioneScoperta.getAttribute("tipo");
+
+            let pubblicazionaDaScoprire;
+            let nextIdPubblicazione = Number(idPubblicazioneSelezionata)-1;
+            if(tipo == "storia")
+                pubblicazionaDaScoprire = document.querySelector("#" + usernamePubblicazioneScoperta + " #divStoriaNascosta #id" + nextIdPubblicazione);   
+            else
+                pubblicazionaDaScoprire = document.querySelector("#divPost #" + usernamePubblicazioneScoperta + " #id" + nextIdPubblicazione);
+
             document.querySelector(".scoperta").className = "coperta";
-            if(storiaSelezionata != null)
+            if(pubblicazionaDaScoprire != null)
             {
-                console.log("in");
-                storiaSelezionata.className = "scoperta";
+                pubblicazionaDaScoprire.className = "scoperta";
             }
         }
         else if(e.key == "Escape")
