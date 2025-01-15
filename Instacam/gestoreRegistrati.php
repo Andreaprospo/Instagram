@@ -14,11 +14,11 @@ if (!isset($_GET["username"], $_GET["password"], $_GET["mail"]) || empty($_GET["
     exit;
 }
 
-// Controllo che tra gli utenti (tra i file) caricati ce ne sia uno con lo stesso "$username"
+//controllo che tra gli utenti (tra i file) caricati ce ne sia uno con lo stesso "$username"
 $directory = '/FileUtenti';
 $files = scandir($directory);
 
-// Controllo che tra gli utenti (tra i file) caricati ce ne sia uno con lo stesso "$nomeUtente"
+//controllo che tra gli utenti (tra i file) caricati ce ne sia uno con lo stesso "$nomeUtente"
 $directory = 'FileUtenti';
 $fileUtenti = scandir($directory);
 
@@ -39,7 +39,7 @@ foreach ($fileUtenti as $fileUtente) {
     }
 }
 
-// Controllo che la mail non sia già in uso da nessun utente (tra i file) caricati
+//controllo che la mail non sia già in uso da nessun utente (tra i file) caricati
 foreach ($fileUtenti as $fileUtente) {
     if ($fileUtente !== '.' && $fileUtente !== '..') {
         $percorsoFileDiInformazioniUtente = $directory . '/' . $fileUtente . '/FileInfo.csv';
@@ -58,10 +58,9 @@ foreach ($fileUtenti as $fileUtente) {
     }
 }
 
-// Salva in sessione l'utente appena registrato
+//salva in sessione l'utente appena registrato
 $_SESSION["username"] = $username;
 $_SESSION["password"] = $password;
 $_SESSION["mail"] = $mail;
-
 header("location: paginaConfigurazioneProfilo.php?messaggio=successo");
 ?>
