@@ -1,6 +1,12 @@
 <?php
 require_once "Classi/Profilo.php";
 
+session_start();
+if(!isset($_SESSION))
+    if(isset($_SESSION["utenteCorrente"]))
+        $_SESSION["utenteCorrente"] = null;
+session_destroy();
+
 $username = $_POST['username'];
 $pathUtente = "./FileUtenti/$username";
 

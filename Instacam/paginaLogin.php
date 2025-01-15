@@ -1,3 +1,15 @@
+<?php
+    require_once "Classi/Profilo.php";
+
+    if(!isset($_SESSION))
+        session_start();
+    
+    if(isset($_SESSION["utenteCorrente"]))
+    {
+        header("location:paginaHome.php");
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

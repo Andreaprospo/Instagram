@@ -188,7 +188,10 @@ class Profilo
                 continue;
             $campi = explode(";", $pubblicazione);
             if($campi[1] == "Storia")
-                $allStories[] = Storia::parse($campi);
+            {
+                if(!Storia::checkDate($campi[4]))
+                    $allStories[] = Storia::parse($campi);
+            }
         }
         $this->stories = $allStories;
         return $this->stories;
@@ -207,7 +210,7 @@ class Profilo
             $dati = file_get_contents("$path/FileInfo.csv");
             $arrayDati = explode(";", $dati);
             require_once "Classi/Profilo.php";
-            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4], $arrayDati[5] );
+            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4], $arrayDati[5]);
         }      
         return null;
     }
@@ -225,6 +228,7 @@ class Profilo
         file_put_contents($pathUtente . "/FilePubblicazione.csv", "", FILE_APPEND);
         file_put_contents($pathUtente . "/FileSeguiti.csv", "", FILE_APPEND);
         file_put_contents($pathUtente . "/FileCommenti.csv", "", FILE_APPEND);
+        copy("./fotoProfiloBase.jpg", "$pathUtente/fotoProfilo.jpg");
     }
 
 

@@ -17,7 +17,6 @@ if (!isset($_GET["username"], $_GET["password"], $_GET["mail"]) || empty($_GET["
 //controllo che tra gli utenti (tra i file) caricati ce ne sia uno con lo stesso "$username"
 $directory = '/FileUtenti';
 $files = scandir($directory);
-
 //controllo che tra gli utenti (tra i file) caricati ce ne sia uno con lo stesso "$nomeUtente"
 $directory = 'FileUtenti';
 $fileUtenti = scandir($directory);
@@ -48,7 +47,9 @@ foreach ($fileUtenti as $fileUtente) {
             //PHP_EOL è il separatore di riga è una costante predefinita in PHP 
             $righe = explode("\n", $contenutoFile);
             foreach ($righe as $riga) {
-                $dati = str_getcsv($riga);
+                if($riga == null)
+                    continue;
+                $dati = explode(";", $riga);
                 if ($dati[2] === $mail) {
                     header("location: paginaRegistrazione.php?messaggio=mail già in uso!");
                     exit;

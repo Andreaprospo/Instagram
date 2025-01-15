@@ -16,36 +16,36 @@
             if (!isset($_SESSION))
                 session_start();
             //variabile appoggio
-            $username = $_SESSION["utenteCorrente"]->getUsername();
+            $utenteCorrente = $_SESSION["utenteCorrente"];
             //piglio il profilo dall'username
-            $profilo = Profilo::getProfiloDaUsername($username);
-        ?>
-        <?php
-            require_once "footer.php";
         ?>
 
         <div id="container">
-            <h1>Profilo di <?php echo $profilo->getUsername(); ?></h1>
-            <img src="<?php echo $profilo->getPathFoto(); ?>" alt="Foto Profilo">
-            <p>Email: <?php echo $profilo->getMail(); ?></p>
-            <p>Descrizione: <?php echo $profilo->getDescrizione(); ?></p>
+            <h1>Profilo di <?php echo $utenteCorrente->getUsername(); ?></h1>
+            <img src="<?php echo $utenteCorrente->getPathFoto(); ?>" alt="Foto Profilo">
+            <p>Email: <?php echo $utenteCorrente->getMail(); ?></p>
+            <p>Descrizione: <?php echo $utenteCorrente->getDescrizione(); ?></p>
 
             <h2>Seguiti</h2>
             <ul>
                 <?php
-                $seguiti = $profilo->getSeguiti();
+                $seguiti = $utenteCorrente->getSeguiti();
                 foreach ($seguiti as $seguito) {
-                    echo "<li>" . $seguito . "</li>";
+                    if($seguito == null)
+                        continue;
+                    echo "<li>" . $seguito->getUsername() . "</li>";
                 }
                 ?>
             </ul>
 
             <h2>Followers</h2>
             <ul>
-                <?php
-                $followers = $profilo->getFollowers();
+            <?php
+                $followers = $utenteCorrente->getFollowers();
                 foreach ($followers as $follower) {
-                    echo "<li>" . $follower. "</li>";
+                    if($follower == null)
+                        continue;
+                    echo "<li>" . $follower->getUsername() . "</li>";
                 }
                 ?>
             </ul>
@@ -55,7 +55,7 @@
             <h2>Post</h2>
             <div id="container2">
                 <?php
-                $posts = Post::getPostsDaUser($username);
+                $posts = $utenteCorrente->getPost();
                 foreach ($posts as $post) {
                     echo "<div class='post'>";
                     echo "<img src='" . $post->getPathFoto() . "'>";
@@ -67,13 +67,18 @@
             </div>
 
             <form action="paginaModificaProfilo.php" method="get">
-                <input type="hidden" name="username" value="<?php echo $username; ?>">
+                <input type="hidden" name="username" value="<?php echo $utenteCorrente->getUsername(); ?>">
                 <button type="submit">Modifica Profilo</button>
             </form>
 
             <form action="gestoreEliminaProfilo.php" method="post">
-                <input type="hidden" name="username" value="<?php echo $username; ?>">
+                <input type="hidden" name="username" value="<?php echo $utenteCorrente->getUsername(); ?>">
                 <button type="submit">Elimina Profilo</button>
+            </form>
+
+            <form action="gestoreLogout.php" method="post">
+                <input type="hidden" name="comando" value="logout">
+                <button type="submit">Logout</button>
             </form>
         </div>
         <?php

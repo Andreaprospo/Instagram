@@ -4,6 +4,8 @@ if (!(isset($_SESSION)))
     session_start();
 
 require_once "Classi/Profilo.php";
+print_r($_SESSION["utenteCorrente"]);
+echo "CIOA";
 
 $username = $_SESSION["username"];
 $mail = $_SESSION["mail"];
@@ -32,6 +34,7 @@ if ($profilo->salvaFotoProfilo($pathFoto)) {
     $_SESSION["fotoProfilo"] = $profilo->getPathFoto();
     
     header("location: paginaProfilo.php?messaggio=successo");
+    $_SESSION["utenteCorrente"] = $profilo;
 } else {
     header("location: paginaConfigurazioneProfilo.php?messaggio=errore nel caricamento della foto");
 }
