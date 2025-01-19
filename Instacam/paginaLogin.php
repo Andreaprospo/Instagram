@@ -27,7 +27,7 @@
                     echo "<div class=messaggio>Occhio, $_GET[messaggio]</div>";
                 }
             ?>
-            <form action="gestoreLogin.php">
+            <form action="gestoreLogin.php" id = "mainForm">
                 <div>
                     <label for="username">Username</label>
                     <input type="text" id = "username" name = "username">
@@ -37,6 +37,9 @@
                     <input type="password" id = "password" name = "password">
                 </div>
                 <button>Manda</button>
+            </form>
+            <form action="paginaRegistrati.php">
+                <button>Registrati</button>
             </form>
         </div>
     </body>

@@ -10,20 +10,27 @@
     <title>REGISTRAZIONE</title>
 </head>
 <body>
-    <form action="gestoreRegistrati.php" method="get">
-        <div>
-            <label for="mail">MAIL</label>
-            <input type="mail" id="mail" name="mail">
-        </div>
-        <div>
-            <label for="username">USERNAME</label>
-            <input type="text" id="username" name="username">
-        </div>
-        <div>
-            <label for="password">PASSWORD</label>
-            <input type="password" id="password" name="password">
-        </div>
-        <button>CONFIGURA PROFILO</button>
-    </form>
+    <div class = "container">
+        <?php
+            if (isset($_GET["messaggio"]) && !empty($_GET["messaggio"])) {
+                echo "<div class=messaggio>Occhio, $_GET[messaggio]</div>";
+            }
+        ?>
+        <form action="gestoreRegistrati.php" method="get">
+            <div>
+                <label for="mail">MAIL</label>
+                <input type="mail" id="mail" name="mail">
+            </div>
+            <div>
+                <label for="username">USERNAME</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div>
+                <label for="password">PASSWORD</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button>CONFIGURA PROFILO</button>
+        </form>
+    </div>
 </body>
 </html>

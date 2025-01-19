@@ -18,9 +18,7 @@
         {
             if(!isset($_SESSION))
                 session_start();
-
             $_SESSION["utenteCorrente"] = $profilo;
-            echo "save";
             header("location:paginaHome.php");
             exit;
         }

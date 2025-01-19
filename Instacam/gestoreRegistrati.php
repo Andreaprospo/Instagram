@@ -10,7 +10,7 @@ $password = $_GET["password"];
 $mail = $_GET["mail"];
 
 if (!isset($_GET["username"], $_GET["password"], $_GET["mail"]) || empty($_GET["username"]) || empty($_GET["password"]) || empty($_GET["mail"])) {
-    header("location: paginaRegistrazione.php?messaggio=inserisci tutti i dati!");
+    header("location:paginaRegistrati.php?messaggio=inserisci tutti i dati!");
     exit;
 }
 
@@ -30,7 +30,7 @@ foreach ($fileUtenti as $fileUtente) {
             foreach ($righe as $riga) {
                 $dati = str_getcsv($riga);
                 if ($dati[0] === $username) {
-                    header("location: paginaRegistrazione.php?messaggio=nome utente già in uso!");
+                    header("location:paginaRegistrati.php?messaggio=nome utente già in uso!");
                     exit;
                 }
             }
@@ -51,7 +51,7 @@ foreach ($fileUtenti as $fileUtente) {
                     continue;
                 $dati = explode(";", $riga);
                 if ($dati[2] === $mail) {
-                    header("location: paginaRegistrazione.php?messaggio=mail già in uso!");
+                    header("location:paginaRegistrati.php?messaggio=mail già in uso!");
                     exit;
                 }
             }
@@ -60,8 +60,10 @@ foreach ($fileUtenti as $fileUtente) {
 }
 
 //salva in sessione l'utente appena registrato
-$_SESSION["username"] = $username;
-$_SESSION["password"] = $password;
-$_SESSION["mail"] = $mail;
-header("location: paginaConfigurazioneProfilo.php?messaggio=successo");
+$utenteCorrente = new Profilo($username, $mail, $password, null, null);
+$_SESSION["utenteCorrente"] = $utenteCorrente;
+$utenteCorrente->creaGerarchia();
+$utenteCorrente->saveInfo();
+
+header("location:paginaHome.php?messaggio=successo");
 ?>

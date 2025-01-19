@@ -67,12 +67,10 @@
             </div>
 
             <form action="paginaModificaProfilo.php" method="get">
-                <input type="hidden" name="username" value="<?php echo $utenteCorrente->getUsername(); ?>">
                 <button type="submit">Modifica Profilo</button>
             </form>
 
             <form action="gestoreEliminaProfilo.php" method="post">
-                <input type="hidden" name="username" value="<?php echo $utenteCorrente->getUsername(); ?>">
                 <button type="submit">Elimina Profilo</button>
             </form>
 

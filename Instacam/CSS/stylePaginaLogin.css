@@ -13,7 +13,7 @@ body {
 }
 
 /* Stile per il form */
-form {
+#mainForm {
     background: rgba(255, 255, 255, 0.2); /* Sfondo semi-trasparente */
     padding: 30px 40px;
     border-radius: 15px; /* Angoli arrotondati */
@@ -25,8 +25,15 @@ form {
     max-width: 400px; /* Larghezza massima del form */
 }
 
+form
+{
+    margin-top: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
 /* Stile per i div che contengono gli input */
-form div {
+#mainForm div {
     margin-bottom: 20px; /* Spaziatura tra i campi */
 }
 

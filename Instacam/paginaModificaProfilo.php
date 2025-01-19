@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="iconaSito.png" type="image/png">
-    <link rel="stylesheet" href="CSS/styleProfilo.css">
+    <link rel="stylesheet" href="CSS/styleModificaProfilo.css">
     <link rel="stylesheet" href="CSS/styleFooter.css">
     <title>MODIFICA PROFILO</title>
 </head>
@@ -17,8 +17,7 @@
 
         $username = $_SESSION["utenteCorrente"]->getUsername();
         //piglio il profilo dall'username
-        $profilo = Profilo::getProfiloDaUsername($username);
-
+        $profilo = Profilo::fromCSV($username);
     ?>
     <?php
         require_once "footer.php";
@@ -28,27 +27,19 @@
         <h1>Modifica Profilo di <?php echo htmlspecialchars($profilo->getUsername()); ?></h1>
 
         <form action="gestoreModificaProfilo.php" method="post" enctype="multipart/form-data">
-            <div>
+            <div class = "modifiche">
                 <label for="fotoProfilo">FOTO PROFILO</label>
                 <input type="file" id="fotoProfilo" name="fotoProfilo" accept="image/*">
             </div>
-
-            <div>
-                <label for="nome">NOME</label>
-                <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($profilo->getNome()); ?>">
-            </div>
-
-            <div>
+            <div class = "modifiche">
                 <label for="mail">EMAIL</label>
-                <input type="email" id="mail" name="mail" value="<?php echo htmlspecialchars($profilo->getMail()); ?>">
+                <input type="mail" id="mail" name="mail" value="<?php echo htmlspecialchars($profilo->getMail()); ?>">
             </div>
-
-            <div>
+            <div class = "modifiche">
                 <label for="descrizione">DESCRIZIONE</label>
                 <textarea id="descrizione" name="descrizione" cols="30" rows="10"><?php echo htmlspecialchars($profilo->getDescrizione()); ?></textarea>
             </div>
-
-            <button type="submit">Salva Modifiche</button>
+            <button>Salva Modifiche</button>
         </form>
 
         <form action="gestoreEliminaProfilo.php" method="post">

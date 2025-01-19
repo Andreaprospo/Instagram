@@ -7,63 +7,47 @@ class Profilo
     private $mail;
     private $password;
     private $descrizione;
-    private $nome;
     private $pathFoto;
     private $seguiti = [];
     private $followers = [];
     private $post = [];
     private $stories = [];
     
-    public function __construct($username, $mail, $password, $descrizione, $pathFoto, $nome) {
+    public function __construct($username, $mail, $password, $descrizione, $pathFoto) {
         $this->username = $username;
         $this->mail = $mail;
         $this->password = $password;
         $this->descrizione = $descrizione;
-        $this->pathFoto = $pathFoto;
-        $this->nome = $nome;
+        $pathFinale = "./FileUtenti/$username/fotoProfilo.png";
+        if(!file_exists("./FileUtenti/$username"))
+            mkdir("./FileUtenti/$username");
+        if($pathFoto == null)
+        {
+            copy("./fotoBase.png",$pathFinale);
+            $this->pathFoto = $pathFinale;
+        }
+        else
+        {
+            $this->pathFoto = $pathFoto;
+        }
     }
 
-    public function salvaFotoProfilo($pathFoto)
+    public function salvaFotoProfilo($pathFoto, $estensione)
     {
-        $directory = "FileUtenti/$this->username";
-        $estensione = pathinfo($pathFoto, PATHINFO_EXTENSION);
+        $directory = "./FileUtenti/$this->username";
         $targetFile = $directory . "/fotoProfilo." . $estensione;
 
-        //controlla se la directory esiste, altrimenti la crea
-        if (!file_exists($directory)) {
-            mkdir($directory, 0777, true);
-        }
-
+        unlink($this->pathFoto);
         //sposta il file caricato nella directory dell'utente
         if (move_uploaded_file($pathFoto, $targetFile)) {
             $this->pathFoto = $targetFile;
+            $this->saveInfo();
             return true;
         } else {
             return false;
         }
+        
     }
-
-    
-    public static function getProfiloDaUsername($username) {
-
-        $pathProfilo = "./FileUtenti/$username/FileInfo.csv";
-
-        if (file_exists($pathProfilo)) {
-            $dati = file_get_contents($pathProfilo);
-            $dati = explode(";", $dati);
-            return new Profilo(
-                $dati[0],
-                $dati[1],
-                $dati[2],
-                $dati[3],
-                $dati[4],
-                $dati[5],
-            );
-        } else {
-            return null;
-        }
-    }
-    
 
     // SENZA controlli le set (NO CONTROLLI)
 
@@ -74,6 +58,7 @@ class Profilo
     public function setUsername($username)
     {
         $this->username = $username;
+        $this->saveInfo();
     }
     public function getMail()
     {
@@ -82,6 +67,7 @@ class Profilo
     public function setMail($mail)
     {
         $this->mail = $mail;
+        $this->saveInfo();
     }
     public function getPassword()
     {
@@ -90,6 +76,7 @@ class Profilo
     public function setPassword($password)
     {
         $this->password = $password;
+        $this->saveInfo();
     }
     public function getDescrizione()
     {
@@ -98,6 +85,7 @@ class Profilo
     public function setDescrizione($descrizione)
     {
         $this->descrizione = $descrizione;
+        $this->saveInfo();
     }
     public function getPathFoto()
     {
@@ -105,19 +93,12 @@ class Profilo
     }
     public function setPathFoto($pathFoto)
     {
-        $this->pathFoto = $pathFoto;
+        if(str_contains($pathFoto, "./FileUtenti"))
+            $this->pathFoto = $pathFoto;
+        else
+            $this->pathFoto = "./FileUtenti/$pathFoto";
+        $this->saveInfo();
     }
-
-    public function getNome()
-    {
-        return $this->nome;
-    }
-
-    public function setNome($nome)
-    {
-        $this->nome = $nome;
-    }
-
     public function aggiungiSeguito($username)
     {
         if (!in_array($username, $this->seguiti)) {
@@ -196,12 +177,13 @@ class Profilo
         $this->stories = $allStories;
         return $this->stories;
     }
-    public function toCSV()
+    public function saveInfo()
     {
         $path = "./FileUtenti/$this->username/FileInfo.csv";
-        $dati = "$this->username;$this->mail;$this->password;$this->descrizione;$this->pathFoto;$this->nome;\n";
+        $dati = "$this->username;$this->mail;$this->password;$this->descrizione;$this->pathFoto;\n";
         file_put_contents($path, $dati);
     }
+
     public static function fromCSV($username)
     {
         $path = "./FileUtenti/$username";
@@ -210,7 +192,7 @@ class Profilo
             $dati = file_get_contents("$path/FileInfo.csv");
             $arrayDati = explode(";", $dati);
             require_once "Classi/Profilo.php";
-            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4], $arrayDati[5]);
+            return new Profilo($arrayDati[0], $arrayDati[1],$arrayDati[2], $arrayDati[3], $arrayDati[4]);
         }      
         return null;
     }
@@ -218,7 +200,8 @@ class Profilo
     public function creaGerarchia()
     {
         $pathUtente = "./FileUtenti/$this->username";
-        mkdir($pathUtente, 0777, true); 
+        if(!file_exists($pathUtente))
+            mkdir($pathUtente, 0777, true); 
         mkdir($pathUtente . "/CartellaCommenti", 0777, true); 
         mkdir($pathUtente . "/FotoPost", 0777, true); 
         mkdir($pathUtente . "/FotoStoria", 0777, true); 
@@ -230,6 +213,4 @@ class Profilo
         file_put_contents($pathUtente . "/FileCommenti.csv", "", FILE_APPEND);
         copy("./fotoProfiloBase.jpg", "$pathUtente/fotoProfilo.jpg");
     }
-
-
 }

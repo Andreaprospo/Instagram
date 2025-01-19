@@ -5,45 +5,35 @@ if (!isset($_SESSION))
     session_start();
 
 
-$username = $_SESSION["utenteCorrente"]->getUsername();
-$profilo = Profilo::getProfiloDaUsername($username);
+$profilo = $_SESSION["utenteCorrente"];
 
-$nome = $_POST['nome'];
-$mail = $_POST['mail'];
-$descrizione = $_POST['descrizione'];
-$fotoProfilo = $_FILES['fotoProfilo'];
+$mail = null;
+$descrizione = null;
+$fotoProfilo = null;
 
-// Verifica che tutti i campi siano stati inseriti
-if (!isset($nome, $mail, $descrizione) || empty($nome) || empty($mail) || empty($descrizione)) {
-    header("Location: paginaModificaProfilo.php?messaggio=inserisci tutti i dati!");
-    exit;
-}
+if(isset($_POST["mail"]))
+    $profilo->setMail($_POST["mail"]);
 
-// Aggiorna i dati del profilo
-$profilo->setNome($nome);
-$profilo->setMail($mail);
-$profilo->setDescrizione($descrizione);
+if(isset($_POST["descrizione"]))
+    $profilo->setDescrizione($_POST["descrizione"]);
 
-// Salva la nuova foto del profilo se è stata caricata
-if (!empty($fotoProfilo['name'])) {
-    $pathFoto = $fotoProfilo['tmp_name'];
-    if (!$profilo->salvaFotoProfilo($pathFoto)) {
-        header("Location: paginaModificaProfilo.php?messaggio=errore nel caricamento della foto");
-        exit;
+if(isset($_FILES["fotoProfilo"])) 
+{
+    $fotoProfilo = $_FILES["fotoProfilo"];
+    if (!empty($fotoProfilo['name'])) {
+        print_r($fotoProfilo);
+        $pathFoto = $fotoProfilo['tmp_name'];
+        $estensione = pathinfo($fotoProfilo["name"], PATHINFO_EXTENSION);
+        if (!$profilo->salvaFotoProfilo($pathFoto, $estensione)) {
+            header("location:paginaModificaProfilo.php?messaggio=errore nel caricamento della foto");
+            exit;
+        }
     }
-}
+}  
 
-// Salva i dati aggiornati nel file
-$profilo->toCSV();
 
-// Aggiorna la sessione
-$_SESSION["nome"] = $nome;
-$_SESSION["mail"]=$mail;
-$_SESSION["descrizione"]=$descrizione;
-
-$_SESSION["utenteCorrente"] = $profilo;
-
-// Reindirizza alla pagina del profilo
-header("Location: paginaProfilo.php?username=$username");
+$profilo->saveInfo();
+//Reindirizza alla pagina del profilo
+header("location: paginaProfilo.php");
 exit;
 ?>

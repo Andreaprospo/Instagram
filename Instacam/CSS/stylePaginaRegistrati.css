@@ -41,7 +41,7 @@ label {
 
 /* Stile per gli input */
 input[type="text"],
-input[type="email"],
+input[type="mail"],
 input[type="password"] {
     width: 100%; /* Occupare tutta la larghezza del contenitore */
     padding: 12px 15px;
@@ -55,9 +55,19 @@ input[type="password"] {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.container {
+    display: flex;
+    flex-direction: column; /* Posiziona il messaggio sopra il form */
+    align-items: center; /* Centrare gli elementi orizzontalmente */
+    justify-content: center; /* Centrare gli elementi verticalmente */
+    height: 100vh; /* L'intera altezza dello schermo */
+    text-align: center; /* Allineare il testo al centro */
+    width: 100%;
+}
+
 /* Effetti al focus degli input */
 input[type="text"]:focus,
-input[type="email"]:focus,
+input[type="mail"]:focus,
 input[type="password"]:focus {
     outline: none;
     transform: scale(1.05);

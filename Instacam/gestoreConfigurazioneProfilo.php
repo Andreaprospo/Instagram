@@ -27,7 +27,7 @@ $pathFoto = $fotoProfilo['tmp_name'];
 if ($profilo->salvaFotoProfilo($pathFoto)) {
     //salva il profilo
     $profilo->creaGerarchia();
-    $profilo->toCSV();
+    $profilo->saveInfo();
 
     $_SESSION["descrizione"] = $descrizione;
     $_SESSION["nome"] = $nome;
